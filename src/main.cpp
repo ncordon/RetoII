@@ -32,6 +32,8 @@ int main() {
 
     // Resuelve el problema
     Cifras cifras(leidos);
-    cifras.resuelve(meta);
-    cifras.escribeOperaciones();
+    if (cifras.resuelve(meta))
+	cifras.escribeOperaciones();
+    else
+	cout << "No se encontró solución";
 }

@@ -15,10 +15,10 @@ Cifras::Cifras (vector<int> introducidos) {
 
 int Cifras::calcula (int a, int b, int codop) {
     switch (codop) {
-      case SUM: return a+b;
-      case RES: return a-b;
-      case MUL: return a*b;
-      case DIV: return a/b;
+    case SUM: return a+b;
+    case RES: return a-b;
+    case MUL: return a*b;
+    case DIV: return a/b;
     }
 }
 
@@ -26,9 +26,9 @@ bool Cifras::resuelve (int meta) {
     // Empieza comprobando que el número buscado no esté entre los dados.
     for (deque<int>::iterator it = numeros.begin(); it != numeros.end(); ++it)
 	if (*it == meta) {
-	    operaciones.push("Solución:");
-	    operaciones.push(aString(meta));
-	    operaciones.push("\n");
+	    operaciones.push_back("Solución:");
+	    operaciones.push_back(aString(meta));
+	    operaciones.push_back("\n");
 	    return true;
 	}
     
@@ -42,64 +42,70 @@ bool Cifras::resuelve_rec (int meta) {
     
     // Toma el primer número disponible
     for (int i=0; i<size; ++i) {
+	//cerr << "Sale " << numeros.front() << endl;
 	int a = numeros.front();
 	numeros.pop_front();
-
-	///////////////
-	cout << "Primero: " << a << endl;
-	for (deque<int>::iterator it = numeros.begin(); it != numeros.end(); ++it)
-	     cerr << *it << ' ';
-	cerr << endl;
-	//////////////
 	
 	// Toma el segundo número disponible
 	for (int j=0; j<size; ++j) {
+	    //cerr << "Sale " << numeros.front() << endl;
 	    int b = numeros.front(); 
 	    numeros.pop_front();
-
-	    ///////////////
-	    cout << "Segundo: " << '('<<a<<','<<b<<')'<< endl;
-	    for (deque<int>::iterator it = numeros.begin(); it != numeros.end(); ++it)
-		cerr << *it << ' ';
-	    cerr << endl;
-	    //////////////
 
 	    // Y prueba sobre ellos todas las operaciones
 	    for (int op=0; op<NOP; ++op) {
 		// Comprueba que la operación sea válida
-		if ((a < b and op==RES) or ((b == 0 or a%b != 0) and op==DIV))
+		cerr << "Operación: " << a << SIMBOLOS[op] << b << endl;
+
+		bool negativo = (a<b and op==RES);
+		bool indivisible = ((b==0 or a%b != 0) and op==DIV);
+		bool cero_trivial = (a==0);
+		if (negativo or indivisible or cero_trivial)
+		    continue;
+
+		// Comprueba que la operación sea útil
+		int resultado = calcula(a,b,op);
+		bool trivial = (resultado == a or resultado == b);
+		bool overflow = (resultado < 0);
+		if (trivial or overflow)
 		    continue;
 
 		// Calcula y guarda la operación.
-		int resultado = calcula(a,b,op);
-		operaciones.push(aString(a));
-		operaciones.push(aString(SIMBOLOS[op]));
-		operaciones.push(aString(b));
-		operaciones.push("=");
-		operaciones.push(aString(resultado));
-		operaciones.push("\n");
+		operaciones.push_back(aString(a));
+		operaciones.push_back(aString(SIMBOLOS[op]));
+		operaciones.push_back(aString(b));
+		operaciones.push_back("=");
+		operaciones.push_back(aString(resultado));
+		operaciones.push_back("\n");
 
 		// Intenta resolver con el nuevo número.
 		if (resultado == meta)
 		    return true;
+		
+		//cerr << "Entra " << resultado << endl;
 		numeros.push_back(resultado);		
 		if (resuelve_rec(meta))
 		    return true;
 		
 		// Sigue probando
+		//cerr << "Sale " << numeros.back() << " que debería ser " << resultado << endl;
+
 		numeros.pop_back();
+
 		int tirarI; char tirarC;
-		operaciones.pop();
-		operaciones.pop();
-		operaciones.pop();
-		operaciones.pop();
-		operaciones.pop();
-		operaciones.pop();
+		operaciones.pop_back();
+		operaciones.pop_back();
+		operaciones.pop_back();
+		operaciones.pop_back();
+		operaciones.pop_back();
+		operaciones.pop_back();
 	    }
 	   
+	    //cerr << "Entra " << b << endl;
 	    numeros.push_back(b);
 	}
 	
+	//cerr << "Entra " << a << endl;
 	numeros.push_back(a);
     }
 }
@@ -109,6 +115,6 @@ void Cifras::escribeOperaciones() {
     cout << "Solución\n";
     while (!operaciones.empty()) {
 	cout << operaciones.front();
-	operaciones.pop();
+	operaciones.pop_front();
     }
 }
