@@ -35,5 +35,5 @@ int main() {
     if (cifras.resuelve(meta))
 	cifras.escribeOperaciones();
     else
-	cout << "No se encontró solución";
+	cout << "No se encontró solución" << endl;
 }
