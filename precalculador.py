@@ -19,6 +19,7 @@ print('''
 
 ''')
 
+print("const int MAXIMO = ", MAXIMO, ";")
 
 # Matriz de sumas: inicio
 print("const int SUMAS[",MAXIMO,"][",MAXIMO,"] = {")
