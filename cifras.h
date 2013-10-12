@@ -92,3 +92,4 @@ inline std::string aString (char c) {
 }
 
 #endif
+
