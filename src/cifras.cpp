@@ -66,8 +66,9 @@ bool Cifras::resuelve_rec (int meta) {
 		// Comprueba que la operación sea útil
 		int resultado = calcula(a,b,op);
 		bool trivial = (resultado == a or resultado == b);
+		bool zero = (resultado == 0);
 		bool overflow = (resultado < 0);
-		if (trivial or overflow)
+		if (trivial or overflow or zero)
 		    continue;
 
 		// Calcula y guarda la operación.
