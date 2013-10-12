@@ -8,6 +8,8 @@
 #include <sstream>
 #include <iostream>
 
+typedef long long int lli;
+
 class Cifras {
 private:
     /**
@@ -19,15 +21,16 @@ private:
      * Pila en la que se guardan las operaciones que se han realizado,
      * para mostrarlas luego por pantalla.
      */
-    std::queue<std::string> operaciones;
+    std::deque<std::string> operaciones;
 
     /**
      * Códigos de las operaciones permitidas y número de operaciones.
+     * Nótese el orden de prioridad de las operaciones que reducen para optimizar
      */
-    static const int SUM = 0;
-    static const int RES = 1;
-    static const int MUL = 2;
-    static const int DIV = 3;
+    static const int SUM = 2;
+    static const int RES = 0;
+    static const int MUL = 3;
+    static const int DIV = 1;
     static const int NOP = 4;
 
     /**
@@ -72,7 +75,8 @@ public:
     bool resuelve (int meta);
 };
 
-const std::string SIMBOLOS = "+-*/";
+const std::string SIMBOLOS = "-/+*";
+
 
 /**
  * Auxiliar que transforma un int en string.
