@@ -33,7 +33,7 @@ bool Cifras::resuelve (int meta) {
 	}
     
     // Resuelve de forma recursiva todas las posibilidades.
-    resuelve_rec(meta);
+    return resuelve_rec(meta);
 }
 
 bool Cifras::resuelve_rec (int meta) {
@@ -116,6 +116,8 @@ bool Cifras::resuelve_rec (int meta) {
 	//cerr << "Entra " << a << endl;
 	numeros.push_back(a);
     }
+
+    return false;
 }
 
 

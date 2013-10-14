@@ -15,6 +15,8 @@ vector<int> leerNumeros (int n=6) {
 	cin >> leido;
 	numeros[i] = leido;
     }
+
+    return numeros;
 }
 
 int main() {
