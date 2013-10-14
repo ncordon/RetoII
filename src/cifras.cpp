@@ -116,3 +116,11 @@ void Cifras::escribeOperaciones() {
         operaciones.pop_front();
     }
 }
+
+void Cifras::escribeAproximacion() {
+    cout << "Aproximación\n";
+    while (!mejor_operaciones.empty()) {
+        cout << mejor_operaciones.front();
+        mejor_operaciones.pop_front();
+    }
+}

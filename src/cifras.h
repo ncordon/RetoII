@@ -70,6 +70,7 @@ public:
      * Las operaciones se encontraban en la pila de operaciones.
      */
     void escribeOperaciones ();
+    void escribeAproximacion ();
 
     /**
      * @brief Resuelve para un número dado.
