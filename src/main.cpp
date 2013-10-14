@@ -35,8 +35,10 @@ int main() {
     // Resuelve el problema
     Cifras cifras(leidos);
     
-    if (cifras.resuelve(meta))
-        cifras.escribeOperaciones();
+    if (cifras.resuelve(meta))    
+        cout << "Solución\n";
     else
-        cifras.escribeAproximacion();
+        cout << "Aproximación\n";
+    
+    cifras.escribeOperaciones();
 }
