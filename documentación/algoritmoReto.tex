@@ -1,11 +1,13 @@
 \documentclass[a4paper,10pt]{scrartcl}
 \usepackage[utf8]{inputenc}
-\def\objeto#1#2#3#4{\underline{\textbf{TDA #1}}
+\usepackage{verbatim}
+
+\newcommand{\objeto}[4]{\underline{\textbf{TDA #1}}
             \begin{center}\begin{tabular}{|p{7cm}|}
                  \hline
-                 \multicolumn{1}{|c|}{#1}\\
+                 \multicolumn{1}{|c|}{\texttt{#1}}\\
                  \hline
-                 \\#2\\\\
+                  \\#2\\\\
                  \hline
                  \\#3\\\\
                  \hline
@@ -25,13 +27,13 @@
 \begin{document}
 \maketitle
 
-    \objeto{DobleCola}{-- double\_queue}
-                {+ push\_back()\\
-                 + pop\_back()\\
-                 + push\_front()\\
-                 + pop\_front()\\
-                 + front()\\
-                 + back()}{
+    \objeto{DobleCola}{\C++{-- double\_queue}}
+                {\C++{+ push\_back()}\\
+                 \C++{+ pop\_back()}\\
+                 \C++{+ push\_front()}\\
+                 \C++{+ pop\_front()}\\
+                 \C++{+ front()}\\
+                 \C++{+ back()}}{
  \item \C++{double\_queue} Vector de objetos \T_ que es usado por
   el TDA \C++{DobleCola} como una doble cola enlazada (en la que
   se puede suprimir e introducir elementos por ambos lados)
@@ -42,16 +44,16 @@
  \item \C++{push\_back()} Introduce un elemento \T_ en el frente
   de \C++{push\_back()}
  \item \C++{pop\_back()} Saca un elemento \T_ del frente de 
-  \C++{push\_back()}}
+  \C++{push\_back()}}  
   
-\objeto{ProblemaCifras}{-- numerosIniciales\\
-                        -- DobleCola numeros\\
-                        -- DobleCola operaciones\\
-                        -- meta\\
-                        -- operacionesPosibles\\
+ \objeto{ProblemaCifras}{\C++{-- numerosIniciales}\\
+                        \C++{-- DobleCola numeros}\\
+                        \C++{-- DobleCola operaciones}\\
+                        \C++{-- meta}\\
+                        \C++{-- operacionesPosibles}\\
                         }
-                        {+ opera()\\
-                        + resuelve()}{
+                        {\C++{+ opera()}\\
+                        \C++{+ resuelve()}}{
   \item \C++{numerosIniciales} Conjunto que almacena los enteros
    a partir de los que se pretende obtener meta
   \item \C++{numeros} Instancia de \C++{DobleCola} en la que se
@@ -63,7 +65,5 @@
   \item \C++{meta} Entero positivo de 3 cifras a aproximar, y en
    caso de ser posible, hallar de forma exacta mediante operaciones sobre
   \item \C++{operacionesPosibles} Conjunto que contiene todas las
-   operaciones posibles aplicables}
-  
-     
+   operaciones posibles aplicables}       
 \end{document}
