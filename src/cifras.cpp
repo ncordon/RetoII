@@ -13,14 +13,6 @@ Cifras::Cifras (vector<int> introducidos) {
     this->numeros = numeros;
 }
 
-/*int Cifras::calcula (int a, int b, int codop) {
-    switch (codop) {
-    case SUM: return a+b; break;
-    case RES: return a-b; break;
-    case MUL: return a*b; break;
-    case DIV: return a/b; break;
-    }
-}*/
 
 bool Cifras::resuelve (int meta) {
     // Empieza comprobando que el número buscado no esté entre los dados.
@@ -55,15 +47,12 @@ bool Cifras::resuelve_rec (int meta) {
 	
 	// Toma el segundo número disponible
 	for (int j=0; j<size-1; ++j) {
-	    //cerr << "Sale " << numeros.front() << endl;
 	    int b = numeros.front(); 
 	    numeros.pop_front();
 
 	    // Y prueba sobre ellos todas las operaciones
 	    for (int op=0; op<NOP; ++op) {
 		// Comprueba que la operación sea válida
-		////
-		//cerr << "Operación: " << a << SIMBOLOS[op] << b << endl;
 
 		bool negativo = (a<b and op==RES);
 		bool indivisible = ((b==0 or a%b != 0) and op==DIV);
@@ -91,14 +80,11 @@ bool Cifras::resuelve_rec (int meta) {
 		if (resultado == meta)
 		    return true;
 		
-		//cerr << "Entra " << resultado << endl;
 		numeros.push_back(resultado);		
 		if (resuelve_rec(meta))
 		    return true;
 		
 		// Sigue probando
-		//cerr << "Sale " << numeros.back() << " que debería ser " << resultado << endl;
-
 		numeros.pop_back();
 
 		operaciones.pop_back();
@@ -109,11 +95,9 @@ bool Cifras::resuelve_rec (int meta) {
 		operaciones.pop_back();
 	    }
 	   
-	    //cerr << "Entra " << b << endl;
 	    numeros.push_back(b);
 	}
 	
-	//cerr << "Entra " << a << endl;
 	numeros.push_back(a);
     }
 
