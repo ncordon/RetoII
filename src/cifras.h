@@ -38,6 +38,7 @@ private:
      * @return Verdadero si hay solución.
      */
     bool resuelve_rec (int meta);
+	 
 
 public:
     /**

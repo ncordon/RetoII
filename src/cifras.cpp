@@ -1,6 +1,7 @@
 #include "cifras.h"
 using namespace std;
 
+typedef int (*Operacion)(int a, int b);
 
 Cifras::Cifras (vector<int> introducidos) {
     // Introduce los números en la doble cola.
@@ -12,15 +13,14 @@ Cifras::Cifras (vector<int> introducidos) {
     this->numeros = numeros;
 }
 
-
-int Cifras::calcula (int a, int b, int codop) {
+/*int Cifras::calcula (int a, int b, int codop) {
     switch (codop) {
-    case SUM: return a+b;
-    case RES: return a-b;
-    case MUL: return a*b;
-    case DIV: return a/b;
+    case SUM: return a+b; break;
+    case RES: return a-b; break;
+    case MUL: return a*b; break;
+    case DIV: return a/b; break;
     }
-}
+}*/
 
 bool Cifras::resuelve (int meta) {
     // Empieza comprobando que el número buscado no esté entre los dados.
@@ -37,6 +37,13 @@ bool Cifras::resuelve (int meta) {
 }
 
 bool Cifras::resuelve_rec (int meta) {
+    Operacion calcula[] = {
+		[](int a, int b){ return a-b; }, 
+		[](int a, int b){ return a/b; }, 
+		[](int a, int b){ return a+b; }, 
+		[](int a, int b){ return a*b; }
+    };
+	 
     int size = numeros.size();
     if (size < 2) return false;
     
@@ -47,7 +54,7 @@ bool Cifras::resuelve_rec (int meta) {
 	numeros.pop_front();
 	
 	// Toma el segundo número disponible
-	for (int j=0; j<size; ++j) {
+	for (int j=0; j<size-1; ++j) {
 	    //cerr << "Sale " << numeros.front() << endl;
 	    int b = numeros.front(); 
 	    numeros.pop_front();
@@ -55,7 +62,8 @@ bool Cifras::resuelve_rec (int meta) {
 	    // Y prueba sobre ellos todas las operaciones
 	    for (int op=0; op<NOP; ++op) {
 		// Comprueba que la operación sea válida
-		cerr << "Operación: " << a << SIMBOLOS[op] << b << endl;
+		////
+		//cerr << "Operación: " << a << SIMBOLOS[op] << b << endl;
 
 		bool negativo = (a<b and op==RES);
 		bool indivisible = ((b==0 or a%b != 0) and op==DIV);
@@ -64,7 +72,7 @@ bool Cifras::resuelve_rec (int meta) {
 		    continue;
 
 		// Comprueba que la operación sea útil
-		int resultado = calcula(a,b,op);
+		int resultado = calcula[op](a,b);
 		bool trivial = (resultado == a or resultado == b);
 		bool zero = (resultado == 0);
 		bool overflow = (resultado < 0);
@@ -93,7 +101,6 @@ bool Cifras::resuelve_rec (int meta) {
 
 		numeros.pop_back();
 
-		int tirarI; char tirarC;
 		operaciones.pop_back();
 		operaciones.pop_back();
 		operaciones.pop_back();
