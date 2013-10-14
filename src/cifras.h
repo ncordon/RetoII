@@ -32,6 +32,9 @@ private:
     static const int MUL = 3;
     static const int DIV = 1;
     static const int NOP = 4;
+    
+    int mejor = -1;
+    std::deque<std::string> mejor_operaciones;
 
     /**
      * @brief Resuelve recursivamente para un número dado.

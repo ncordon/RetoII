@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "cifras.h"
 using namespace std;
 
@@ -8,29 +9,20 @@ Cifras::Cifras (vector<int> introducidos) {
     deque<int> numeros;
     int size = introducidos.size();
     for (int i=0; i<size; ++i)
-	numeros.push_back(introducidos[i]);
+    numeros.push_back(introducidos[i]);
 
     this->numeros = numeros;
 }
 
-/*int Cifras::calcula (int a, int b, int codop) {
-    switch (codop) {
-    case SUM: return a+b; break;
-    case RES: return a-b; break;
-    case MUL: return a*b; break;
-    case DIV: return a/b; break;
-    }
-}*/
-
 bool Cifras::resuelve (int meta) {
     // Empieza comprobando que el número buscado no esté entre los dados.
     for (deque<int>::iterator it = numeros.begin(); it != numeros.end(); ++it)
-	if (*it == meta) {
-	    operaciones.push_back("Solución:");
-	    operaciones.push_back(aString(meta));
-	    operaciones.push_back("\n");
-	    return true;
-	}
+        if (*it == meta) {
+            operaciones.push_back("Solución:");
+            operaciones.push_back(aString(meta));
+            operaciones.push_back("\n");
+            return true;
+        }
     
     // Resuelve de forma recursiva todas las posibilidades.
     return resuelve_rec(meta);
@@ -43,7 +35,7 @@ bool Cifras::resuelve_rec (int meta) {
 		[](int a, int b){ return a+b; }, 
 		[](int a, int b){ return a*b; }
     };
-	 
+    
     int size = numeros.size();
     if (size < 2) return false;
     
@@ -90,6 +82,10 @@ bool Cifras::resuelve_rec (int meta) {
 		// Intenta resolver con el nuevo número.
 		if (resultado == meta)
 		    return true;
+        else if (abs(resultado - meta) < abs(mejor - meta)) {
+            mejor = resultado;
+            mejor_operaciones = operaciones;
+        }
 		
 		//cerr << "Entra " << resultado << endl;
 		numeros.push_back(resultado);		
@@ -124,7 +120,7 @@ bool Cifras::resuelve_rec (int meta) {
 void Cifras::escribeOperaciones() {
     cout << "Solución\n";
     while (!operaciones.empty()) {
-	cout << operaciones.front();
-	operaciones.pop_front();
+        cout << operaciones.front();
+        operaciones.pop_front();
     }
 }
