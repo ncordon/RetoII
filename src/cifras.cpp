@@ -37,11 +37,7 @@ bool Cifras::resuelve_rec (int meta) {
     };
     
     int size = numeros.size();
-    if (size < 2) {
-        mejor_operaciones.push_back(aString(numeros.front()));
-        mejor_operaciones.push_back("\n");
-        return false;
-    }
+    if (size < 2) return false;
     
     // Toma el primer número disponible
     for (int i=0; i<size; ++i) {
