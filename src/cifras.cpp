@@ -26,8 +26,7 @@ bool Cifras::resuelve (int meta) {
     // Empieza comprobando que el número buscado no esté entre los dados.
     for (vector<int>::iterator it = numeros.begin(); it != numeros.end(); ++it)
 	if (*it == meta) {
-	    mejor_operaciones.push_back(aString(meta));
-	    mejor_operaciones.push_back("\n");
+	    mejor_operaciones.push_back(aString(meta) + "\n");
 	    return true;
 	}
     
@@ -86,14 +85,9 @@ bool Cifras::resuelve_rec (int meta) {
 		    continue;
 
 		// Calcula y guarda la operación.
-		operaciones.push_back(aString(c));
-		operaciones.push_back(aString(SIMBOLOS[op]));
-		operaciones.push_back(aString(d));
-		operaciones.push_back("=");
-		operaciones.push_back(aString(resultado));
-		operaciones.push_back("\n");
+		operaciones.push_back(aString(c) + aString(SIMBOLOS[op]) + aString(d) + "=" + aString(resultado));
 
-		// Intenta resolver con el nuevo número.
+		// Intenta resolver o mejorar con el nuevo número.
 		if (abs(resultado - meta) < abs(mejor - meta)) {
 			mejor = resultado;
 			mejor_operaciones = operaciones;
@@ -116,11 +110,6 @@ bool Cifras::resuelve_rec (int meta) {
 		
 		// Saca las operaciones
 		operaciones.pop_back();
-		operaciones.pop_back();
-		operaciones.pop_back();
-		operaciones.pop_back();
-		operaciones.pop_back();
-		operaciones.pop_back();
 	    }
 	   
 	    //cerr << "Entra " << b << endl;
@@ -135,5 +124,5 @@ bool Cifras::resuelve_rec (int meta) {
 
 void Cifras::escribeOperaciones() {
 	for(vector<string>::iterator it=mejor_operaciones.begin(); it!=mejor_operaciones.end(); it++)
-		cout << *it;
+		cout << *it << "\n";
 }

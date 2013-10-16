@@ -101,5 +101,9 @@ inline std::string aString (char c) {
     return ss.str();
 }
 
+inline std::string operator+(std::string a, std::string b) {
+	return a.append(b);
+}
+
 #endif
 
