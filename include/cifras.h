@@ -2,7 +2,6 @@
 #define CLASS
 
 #include <string>
-//#include <deque>
 #include <vector>
 #include <sstream>
 #include <iostream>

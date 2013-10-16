@@ -31,6 +31,7 @@ bool Cifras::resuelve (int meta) {
 	}
     
     // Resuelve de forma recursiva todas las posibilidades.
+    
     resuelve_rec(meta);
 }
 
@@ -87,8 +88,8 @@ bool Cifras::resuelve_rec (int meta) {
 		// Calcula y guarda la operación.
 		operaciones.push_back(aString(c) + aString(SIMBOLOS[op]) + aString(d) + "=" + aString(resultado));
 
-		// Intenta resolver o mejorar con el nuevo número.
-		if (abs(resultado - meta) < abs(mejor - meta)) {
+		// Intenta resolver o mejorar con el nuevo número, sin pasarse
+		if ((meta-resultado) < (meta-mejor) && (meta-resultado)>=0) {
 			mejor = resultado;
 			mejor_operaciones = operaciones;
     
