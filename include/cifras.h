@@ -2,26 +2,24 @@
 #define CLASS
 
 #include <string>
-#include <queue>
+//#include <deque>
 #include <vector>
-#include <deque>
 #include <sstream>
 #include <iostream>
 
-typedef long long int lli;
 
 class Cifras {
 private:
     /**
      * Cola/Pila con los números que deben ser probados.
      */
-    std::deque<int> numeros;
+    std::vector<int> numeros;
 
     /**
      * Pila en la que se guardan las operaciones que se han realizado,
      * para mostrarlas luego por pantalla.
      */
-    std::deque<std::string> operaciones;
+    std::vector<std::string> operaciones;
 
     /**
      * Códigos de las operaciones permitidas y número de operaciones.
@@ -32,16 +30,12 @@ private:
     static const int MUL = 3;
     static const int DIV = 1;
     static const int NOP = 4;
-    
-    int mejor = -1;
-    std::deque<std::string> mejor_operaciones;
 
     /**
      * @brief Resuelve recursivamente para un número dado.
      * @return Verdadero si hay solución.
      */
     bool resuelve_rec (int meta);
-	 
 
 public:
     /**
@@ -70,7 +64,6 @@ public:
      * Las operaciones se encontraban en la pila de operaciones.
      */
     void escribeOperaciones ();
-    void escribeAproximacion ();
 
     /**
      * @brief Resuelve para un número dado.

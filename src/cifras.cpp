@@ -1,118 +1,136 @@
-#include <stdlib.h>
 #include "cifras.h"
 using namespace std;
 
-typedef int (*Operacion)(int a, int b);
 
 Cifras::Cifras (vector<int> introducidos) {
     // Introduce los números en la doble cola.
-    deque<int> numeros;
+    vector<int> numeros;
     int size = introducidos.size();
     for (int i=0; i<size; ++i)
-    numeros.push_back(introducidos[i]);
+	numeros.push_back(introducidos[i]);
 
     this->numeros = numeros;
 }
 
+
+int Cifras::calcula (int a, int b, int codop) {
+    switch (codop) {
+      case SUM: return a+b; break;
+      case RES: return a-b; break;
+      case MUL: return a*b; break;
+      case DIV: return a/b; break;
+    }
+}
+
 bool Cifras::resuelve (int meta) {
     // Empieza comprobando que el número buscado no esté entre los dados.
-    for (deque<int>::iterator it = numeros.begin(); it != numeros.end(); ++it)
-        if (*it == meta) {
-            operaciones.push_back("Solución:");
-            operaciones.push_back(aString(meta));
-            operaciones.push_back("\n");
-            return true;
-        }
+    for (vector<int>::iterator it = numeros.begin(); it != numeros.end(); ++it)
+	if (*it == meta) {
+	    operaciones.push_back("Solución:");
+	    operaciones.push_back(aString(meta));
+	    operaciones.push_back("\n");
+	    return true;
+	}
     
     // Resuelve de forma recursiva todas las posibilidades.
-    return resuelve_rec(meta);
+    resuelve_rec(meta);
 }
 
 bool Cifras::resuelve_rec (int meta) {
-    Operacion calcula[] = {
-		[](int a, int b){ return a-b; }, 
-		[](int a, int b){ return a/b; }, 
-		[](int a, int b){ return a+b; }, 
-		[](int a, int b){ return a*b; }
-    };
-    
     int size = numeros.size();
     if (size < 2) return false;
     
     // Toma el primer número disponible
-    for (int i=0; i<size; ++i) {
-        //cerr << "Sale " << numeros.front() << endl;
-        int a = numeros.front();
-        numeros.pop_front();
+    for (int i=0; i<size-1; ++i) {
+	//cerr << "Sale " << numeros.front() << endl;
+	int a = numeros[i];
 	
-        // Toma el segundo número disponible
-        for (int j=0; j<size-1; ++j) {
-            int b = numeros.front(); 
-            numeros.pop_front();
+	if (!(a==0))
+	  numeros.erase(numeros.begin()+i);
+	else
+	  continue;
+	
+	// Toma el segundo número disponible
+	for (int j=i; j<size-1; ++j) {
+	    //cerr << "Sale " << numeros.front() << endl;
+	    int b = numeros[j];
+	    
+	    if (!(b==0))
+	      numeros.erase(numeros.begin()+j);
+	    else
+	      continue;
+	    
+	    // Y prueba sobre ellos todas las operaciones
+	    for (int op=0; op<NOP; ++op) {
+		// Comprueba que la operación sea válida
+		////
+		//cerr << "Operación: " << a << SIMBOLOS[op] << b << endl;
 
-            // Y prueba sobre ellos todas las operaciones
-            for (int op=0; op<NOP; ++op) {
-                // Comprueba que la operación sea válida
+		int c=a;
+		int d=b;
+		
+		// Cogemos siempre c como el mayor de ambos
+		if (a<b){
+		  d=a;
+		  c=b;
+		}
+		
+		bool indivisible = ((c%d != 0) and op==DIV);
+		if (indivisible)
+		  continue;
+		// Comprueba que la operación sea útil
+		int resultado = calcula(c,d,op);
+		bool trivial = (resultado == a or resultado == b);
+		bool zero = (resultado == 0);
+		bool overflow = (resultado < 0);
+		if (trivial or overflow or zero)
+		    continue;
 
-                bool negativo = (a<b and op==RES);
-                bool indivisible = ((b==0 or a%b != 0) and op==DIV);
-                bool cero_trivial = (a==0);
-                if (negativo or indivisible or cero_trivial)
-                    continue;
+		// Calcula y guarda la operación.
+		operaciones.push_back(aString(c));
+		operaciones.push_back(aString(SIMBOLOS[op]));
+		operaciones.push_back(aString(d));
+		operaciones.push_back("=");
+		operaciones.push_back(aString(resultado));
+		operaciones.push_back("\n");
 
-                // Comprueba que la operación sea útil
-                int resultado = calcula[op](a,b);
-                bool trivial = (resultado == a or resultado == b);
-                bool zero = (resultado == 0);
-                bool overflow = (resultado < 0);
-                if (trivial or overflow or zero)
-                    continue;
-
-                // Calcula y guarda la operación.
-                operaciones.push_back(aString(a));
-                operaciones.push_back(aString(SIMBOLOS[op]));
-                operaciones.push_back(aString(b));
-                operaciones.push_back("=");
-                operaciones.push_back(aString(resultado));
-                operaciones.push_back("\n");
-
-                // Intenta resolver con el nuevo número.
-                if (abs(resultado - meta) < abs(mejor - meta)) {
-                    mejor = resultado;
-                    mejor_operaciones = operaciones;
-                
-                    if (resultado == meta)
-                        return true;
-                }
-
-                numeros.push_back(resultado);
-                if (resuelve_rec(meta))
-                    return true;
-
-                // Sigue probando
-                numeros.pop_back();
-
-                operaciones.pop_back();
-                operaciones.pop_back();
-                operaciones.pop_back();
-                operaciones.pop_back();
-                operaciones.pop_back();
-                operaciones.pop_back();
-            }
+		// Intenta resolver con el nuevo número.
+		if (resultado == meta)
+		    return true;
+		
+		//cerr << "Entra " << resultado << endl;
+		numeros.push_back(resultado);
+		
+		if (resuelve_rec(meta))
+		    return true;
+		
+		// Sigue probando
+		//cerr << "Sale " << numeros.back() << " que debería ser " << resultado << endl;
+		
+		// Saco resultado
+		numeros.pop_back();
+		
+		// Saca las operaciones
+		operaciones.pop_back();
+		operaciones.pop_back();
+		operaciones.pop_back();
+		operaciones.pop_back();
+		operaciones.pop_back();
+		operaciones.pop_back();
+	    }
 	   
-            numeros.push_back(b);
-        }
+	    //cerr << "Entra " << b << endl;
+	    numeros.insert(numeros.begin()+j,b);
+	}
 	
-        numeros.push_back(a);
+	//cerr << "Entra " << a << endl;
+	numeros.insert(numeros.begin()+i,a);
     }
-
-    return false;
 }
 
 
 void Cifras::escribeOperaciones() {
-    while (!mejor_operaciones.empty()) {
-        cout << mejor_operaciones.front();
-        mejor_operaciones.pop_front();
-    }
+    cout << "Solución\n";
+    for(vector<string>::iterator it=operaciones.begin(); it!=operaciones.end(); it++)
+	cout << *it;
 }

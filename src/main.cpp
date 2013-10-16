@@ -15,13 +15,11 @@ vector<int> leerNumeros (int n=6) {
 	cin >> leido;
 	numeros[i] = leido;
     }
-
     return numeros;
 }
 
 int main() {
     // Lee números
-    vector<int> leidos;
     int nuevo;
     int meta;
     
@@ -29,16 +27,13 @@ int main() {
     cin >> meta;
 
     cout << "Introduce números: ";
-    while (cin >> nuevo)
-	leidos.push_back(nuevo);
+    vector<int> leidos (leerNumeros());
 
+    
     // Resuelve el problema
     Cifras cifras(leidos);
-    
-    if (cifras.resuelve(meta))    
-        cout << "Solución\n";
+    if (cifras.resuelve(meta))
+	cifras.escribeOperaciones();
     else
-        cout << "Aproximación\n";
-    
-    cifras.escribeOperaciones();
+	cout << "No se encontró solución" << endl;
 }
