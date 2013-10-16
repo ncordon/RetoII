@@ -2,7 +2,7 @@
 using namespace std;
 
 
-Cifras::Cifras (vector<int> introducidos) {
+Cifras::Cifras (vector<int> introducidos) :mejor(-1) {
     // Introduce los números en la doble cola.
     vector<int> numeros;
     int size = introducidos.size();
@@ -26,9 +26,8 @@ bool Cifras::resuelve (int meta) {
     // Empieza comprobando que el número buscado no esté entre los dados.
     for (vector<int>::iterator it = numeros.begin(); it != numeros.end(); ++it)
 	if (*it == meta) {
-	    operaciones.push_back("Solución:");
-	    operaciones.push_back(aString(meta));
-	    operaciones.push_back("\n");
+	    mejor_operaciones.push_back(aString(meta));
+	    mejor_operaciones.push_back("\n");
 	    return true;
 	}
     
@@ -95,8 +94,13 @@ bool Cifras::resuelve_rec (int meta) {
 		operaciones.push_back("\n");
 
 		// Intenta resolver con el nuevo número.
-		if (resultado == meta)
-		    return true;
+		if (abs(resultado - meta) < abs(mejor - meta)) {
+			mejor = resultado;
+			mejor_operaciones = operaciones;
+    
+			if (resultado == meta)
+				return true;
+		}
 		
 		//cerr << "Entra " << resultado << endl;
 		numeros.push_back(resultado);
@@ -130,7 +134,6 @@ bool Cifras::resuelve_rec (int meta) {
 
 
 void Cifras::escribeOperaciones() {
-    cout << "Solución\n";
-    for(vector<string>::iterator it=operaciones.begin(); it!=operaciones.end(); it++)
-	cout << *it;
+	for(vector<string>::iterator it=mejor_operaciones.begin(); it!=mejor_operaciones.end(); it++)
+		cout << *it;
 }

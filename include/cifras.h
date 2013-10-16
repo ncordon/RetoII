@@ -6,6 +6,7 @@
 #include <vector>
 #include <sstream>
 #include <iostream>
+#include <stdlib.h>
 
 
 class Cifras {
@@ -20,6 +21,13 @@ private:
      * para mostrarlas luego por pantalla.
      */
     std::vector<std::string> operaciones;
+	
+	/**
+	 * Almacena la mejor aproximación hasta el momento y las operaciones
+	 * que requiere llegar a ese resultado.
+	 */
+	int mejor;
+	std::vector<std::string> mejor_operaciones;
 
     /**
      * Códigos de las operaciones permitidas y número de operaciones.
