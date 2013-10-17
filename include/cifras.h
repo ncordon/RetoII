@@ -45,7 +45,7 @@ private:
      * @brief Resuelve recursivamente para un número dado.
      * @return Verdadero si hay solución.
      */
-    bool resuelve_rec (int meta = 0);
+    bool resuelve_rec (int meta = 0, int size);
 
 #ifdef GRUPOS
     /**
@@ -141,8 +141,7 @@ inline std::string aString (char c) {
 }
 
 inline std::string operator+(std::string a, std::string b) {
-	return a.append(b);
+        return a.append(b);
 }
 
 #endif
-
