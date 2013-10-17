@@ -45,7 +45,7 @@ private:
      * @brief Resuelve recursivamente para un número dado.
      * @return Verdadero si hay solución.
      */
-    bool resuelve_rec (int meta = 0, int size);
+    bool resuelve_rec (int meta, int size);
 
 #ifdef GRUPOS
     /**
