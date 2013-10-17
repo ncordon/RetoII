@@ -4,7 +4,7 @@ typedef int (*Operacion)(int a, int b);
 
 
 Cifras::Cifras (vector<int> introducidos) {
-    #ifndef GRUPOS    
+    #ifndef GRUPOS
     // Primera aproximación
     mejor = -1;
     #endif
@@ -137,8 +137,9 @@ bool Cifras::resuelve_rec (int meta) {
 		    return true;
 		
 		// Saco resultado y operaciones
-		#ifndef GRUPOS
 		numeros.pop_back();
+
+                #ifndef GRUPOS
 		operaciones.pop_back();
 		#endif
 	    }
