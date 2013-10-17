@@ -10,16 +10,17 @@ using namespace std;
  */
 vector<int> leerNumeros (int n=6) {
     vector<int> numeros(n);
-    bool tope = false;
-    for (int i=0; i<n && !tope; ++i) {
-	int leido;
-	cin >> leido;
-    if (cin.good()) {
-	    numeros[i] = leido;
-    } else {
-        tope = true;
+
+    int i = 0;
+    int leido;
+    cin >> leido;
+
+    while (cin.good()) {
+        numeros[i] = leido;
+        i++;
+        cin >> leido;
     }
-    }
+
     return numeros;
 }
 
