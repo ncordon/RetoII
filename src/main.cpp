@@ -32,6 +32,6 @@ int main() {
         cout << "Solución" << endl;
     else
         cout << "Aproximación" << endl;
-	
+    
     cifras.escribeOperaciones();
 }
