@@ -20,13 +20,13 @@ private:
      * para mostrarlas luego por pantalla.
      */
     std::vector<std::string> operaciones;
-	
-	/**
-	 * Almacena la mejor aproximación hasta el momento y las operaciones
-	 * que requiere llegar a ese resultado.
-	 */
-	int mejor;
-	std::vector<std::string> mejor_operaciones;
+        
+        /**
+         * Almacena la mejor aproximación hasta el momento y las operaciones
+         * que requiere llegar a ese resultado.
+         */
+        int mejor;
+        std::vector<std::string> mejor_operaciones;
 
     /**
      * Códigos de las operaciones permitidas y número de operaciones.
@@ -42,7 +42,7 @@ private:
      * @brief Resuelve recursivamente para un número dado.
      * @return Verdadero si hay solución.
      */
-    bool resuelve_rec (int meta);
+    bool resuelve_rec (int meta, int size);
 
 public:
     /**
@@ -101,8 +101,7 @@ inline std::string aString (char c) {
 }
 
 inline std::string operator+(std::string a, std::string b) {
-	return a.append(b);
+        return a.append(b);
 }
 
 #endif
-
