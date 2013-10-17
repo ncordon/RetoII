@@ -5,7 +5,7 @@ LIB=./lib
 OBJ=./obj
 SRC=./src
 
-FLAGS= -Wall -g
+FLAGS= -Wall -g -std=c++11
 
 all: $(OBJ)/cifras.o $(OBJ)/main.o
 	g++ -o $(BIN)/RetoII $^ $(FLAGS)
