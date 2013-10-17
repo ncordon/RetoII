@@ -19,15 +19,11 @@ vector<int> leerNumeros () {
 
 int main() {
     // Lee números
-    int nuevo;
-    int meta;
-    
+    int meta; 
     cout << "Introduce meta a resolver: ";
     cin >> meta;
-
     cout << "Introduce números: ";
     vector<int> leidos (leerNumeros());
-
     
     // Resuelve el problema
     cout << "Resolviendo..." << endl;
