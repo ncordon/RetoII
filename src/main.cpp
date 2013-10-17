@@ -8,19 +8,12 @@ using namespace std;
  * @param n Número de números a leer.
  * @return Vector de números leidos.
  */
-vector<int> leerNumeros (int n=6) {
-    vector<int> numeros(n);
-
-    int i = 0;
+vector<int> leerNumeros () {
+    vector<int> numeros;
     int leido;
-    cin >> leido;
-
-    while (cin.good()) {
-        numeros[i] = leido;
-        i++;
-        cin >> leido;
-    }
-
+    while (cin >> leido)
+	numeros.push_back(leido);
+    
     return numeros;
 }
 
@@ -37,11 +30,12 @@ int main() {
 
     
     // Resuelve el problema
+    cout << "Resolviendo..." << endl;
     Cifras cifras(leidos);
     if (cifras.resuelve(meta))    
-        cout << "Solución\n";
+        cout << "Solución" << endl;
     else
-        cout << "Aproximación\n";
+        cout << "Aproximación" << endl;
 	
     cifras.escribeOperaciones();
 }
