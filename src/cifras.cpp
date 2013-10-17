@@ -3,7 +3,7 @@ using namespace std;
 typedef int (*Operacion)(int a, int b); 
 
 
-Cifras::Cifras (vector<int> introducidos) :mejor(-1) {
+Cifras::Cifras (vector<int> introducidos) : mejor(-1) {
     // Introduce los números en la doble cola.
     vector<int> numeros;
     int size = introducidos.size();
@@ -16,12 +16,17 @@ Cifras::Cifras (vector<int> introducidos) :mejor(-1) {
 
 bool Cifras::resuelve (int meta) {
     // Empieza comprobando que el número buscado no esté entre los dados.
-    for (vector<int>::iterator it = numeros.begin(); it != numeros.end(); ++it)
+    for (vector<int>::iterator it = numeros.begin(); it != numeros.end(); ++it) {
+	
+#ifndef GRUPOS
 	if (*it == meta) {
 	    mejor_operaciones.push_back(aString(meta) + "\n");
 	    return true;
 	}
-    
+#endif
+
+    }
+
     // Resuelve de forma recursiva todas las posibilidades.
     return resuelve_rec(meta);
 }

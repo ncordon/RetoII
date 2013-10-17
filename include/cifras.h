@@ -15,18 +15,21 @@ private:
      */
     std::vector<int> numeros;
 
+#ifndef GRUPOS
     /**
      * Pila en la que se guardan las operaciones que se han realizado,
      * para mostrarlas luego por pantalla.
      */
     std::vector<std::string> operaciones;
-	
-	/**
-	 * Almacena la mejor aproximación hasta el momento y las operaciones
-	 * que requiere llegar a ese resultado.
-	 */
-	int mejor;
-	std::vector<std::string> mejor_operaciones;
+
+    /**
+     * Almacena la mejor aproximación hasta el momento y las operaciones
+     * que requiere llegar a ese resultado.
+     */
+    int mejor;
+    std::vector<std::string> mejor_operaciones;
+
+#endif
 
     /**
      * Códigos de las operaciones permitidas y número de operaciones.
@@ -43,6 +46,19 @@ private:
      * @return Verdadero si hay solución.
      */
     bool resuelve_rec (int meta);
+
+#ifdef GRUPOS
+    /**
+     * @brief Vector que contiene los números de 3 cifras.
+     * Verdadero si el número ya ha sido encontrado.
+     */
+    std::vector<bool> encontrado;
+
+    /**
+     * @brief Número de números encontrados actualmente
+     */
+    int total_encontrados;
+#endif
 
 public:
     /**

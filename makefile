@@ -5,10 +5,13 @@ LIB=./lib
 OBJ=./obj
 SRC=./src
 
-FLAGS= -Wall -g -std=c++11
+all: FLAGS= -Wall -g -std=c++11
+grupos: FLAGS= -Wall -g -std=c++11 -DGRUPOS
 
 all: $(OBJ)/cifras.o $(OBJ)/main.o
 	g++ -o $(BIN)/RetoII $^ $(FLAGS)
+grupos: $(OBJ)/cifras.o $(OBJ)/main.o
+	g++ -o $(BIN)/Grupos $^ $(FLAGS)
 $(OBJ)/cifras.o: $(SRC)/cifras.cpp
 	g++ -o $(OBJ)/cifras.o -c $< -I$(INCLUDE) $(FLAGS)
 $(OBJ)/main.o: $(SRC)/main.cpp
