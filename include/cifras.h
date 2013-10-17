@@ -73,12 +73,17 @@ private:
 #endif
 
 public:
-    #ifdef GRUPOS
+#ifdef GRUPOS
     /**
-     * Imprime los que faltan por marcar
+     * Imprime los que faltan por marcar.
      */
     void imprime_restantes ();
-    #endif
+
+    /**
+     * Comprueba que estén todos marcados.
+     */
+    bool todos_marcados ();
+ #endif
 
     /**
      * @brief Constructor. Selecciona un conjunto de números aleatorio.

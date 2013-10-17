@@ -42,7 +42,7 @@ int main() {
     #endif
 
     #ifdef GRUPOS
-    if (cifras.resuelve())
+    if (cifras.resuelve() or cifras.todos_marcados())
 	cout << "Marcados todos" << endl;
     else {
 	cout << "Faltaron por marcar:" << endl;

@@ -16,6 +16,9 @@ Cifras::Cifras (vector<int> introducidos) {
     for (int i=0; i<BUSCADOS; ++i)
 	encontrado_inicial[i] = false;
     encontrado = encontrado_inicial;
+
+    // El cero se marca por defecto
+    marcar(0);
     #endif
 
     // Introduce los números en la doble cola.
@@ -179,5 +182,14 @@ void Cifras::imprime_restantes () {
 	if (!encontrado[i])
 	    cout << i << ' ';
     cout << endl;
+}
+#endif
+
+#ifdef GRUPOS
+bool Cifras::todos_marcados () {
+    bool todos = true;
+    for (int i=0; i<BUSCADOS and todos; ++i)
+	todos = encontrado[i];
+    return todos;
 }
 #endif
