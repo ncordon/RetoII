@@ -1,5 +1,6 @@
 #include "cifras.h"
 using namespace std;
+typedef int (*Operacion)(int a, int b); 
 
 
 Cifras::Cifras (vector<int> introducidos) :mejor(-1) {
@@ -13,14 +14,14 @@ Cifras::Cifras (vector<int> introducidos) :mejor(-1) {
 }
 
 
-int Cifras::calcula (int a, int b, int codop) {
+/*int Cifras::calcula (int a, int b, int codop) {
     switch (codop) {
       case SUM: return a+b; break;
       case RES: return a-b; break;
       case MUL: return a*b; break;
       case DIV: return a/b; break;
     }
-}
+}*/
 
 bool Cifras::resuelve (int meta) {
     // Empieza comprobando que el número buscado no esté entre los dados.
@@ -31,14 +32,21 @@ bool Cifras::resuelve (int meta) {
 	}
     
     // Resuelve de forma recursiva todas las posibilidades.
-    
-    resuelve_rec(meta);
+    return resuelve_rec(meta);
 }
 
 bool Cifras::resuelve_rec (int meta) {
+    // Operaciones
+    Operacion calcula[] = {
+	[](int a, int b){ return a-b; },
+	[](int a, int b){ return a/b; },
+	[](int a, int b){ return a+b; },
+	[](int a, int b){ return a*b; }
+    };
+    
     int size = numeros.size();
     if (size < 2) return false;
-    
+
     // Toma el primer número disponible
     for (int i=0; i<size-1; ++i) {
 	//cerr << "Sale " << numeros.front() << endl;
@@ -78,7 +86,7 @@ bool Cifras::resuelve_rec (int meta) {
 		if (indivisible)
 		  continue;
 		// Comprueba que la operación sea útil
-		int resultado = calcula(c,d,op);
+		int resultado = calcula[op](c,d);
 		bool trivial = (resultado == a or resultado == b);
 		bool zero = (resultado == 0);
 		bool overflow = (resultado < 0);
@@ -120,6 +128,8 @@ bool Cifras::resuelve_rec (int meta) {
 	//cerr << "Entra " << a << endl;
 	numeros.insert(numeros.begin()+i,a);
     }
+
+    return false;
 }
 
 
