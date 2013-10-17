@@ -3,33 +3,55 @@ using namespace std;
 typedef int (*Operacion)(int a, int b); 
 
 
-Cifras::Cifras (vector<int> introducidos) : mejor(-1) {
+Cifras::Cifras (vector<int> introducidos) {
+    #ifndef GRUPOS    
+    // Primera aproximación
+    mejor = -1;
+    #endif
+
+    #ifdef GRUPOS
+    // Números marcados
+    total_encontrados = 0;
+    vector<bool> encontrado_inicial(BUSCADOS);
+    for (int i=0; i<BUSCADOS; ++i)
+	encontrado_inicial[i] = false;
+    encontrado = encontrado_inicial;
+    #endif
+
     // Introduce los números en la doble cola.
     vector<int> numeros;
     int size = introducidos.size();
     for (int i=0; i<size; ++i)
-	numeros.push_back(introducidos[i]);
+        numeros.push_back(introducidos[i]);
 
     this->numeros = numeros;
 }
+
+
 
 
 bool Cifras::resuelve (int meta) {
     // Empieza comprobando que el número buscado no esté entre los dados.
     for (vector<int>::iterator it = numeros.begin(); it != numeros.end(); ++it) {
 	
-#ifndef GRUPOS
+        #ifndef GRUPOS
 	if (*it == meta) {
 	    mejor_operaciones.push_back(aString(meta) + "\n");
 	    return true;
 	}
-#endif
+        #endif
+
+        #ifdef GRUPOS
+	marcar(*it);
+        #endif
 
     }
 
     // Resuelve de forma recursiva todas las posibilidades.
     return resuelve_rec(meta);
 }
+
+
 
 
 bool Cifras::resuelve_rec (int meta) {
@@ -87,9 +109,12 @@ bool Cifras::resuelve_rec (int meta) {
 		    continue;
 
 		// Calcula y guarda la operación.
+		#ifndef GRUPOS
 		operaciones.push_back(aString(c) + aString(SIMBOLOS[op]) + aString(d) + "=" + aString(resultado));
+		#endif
 
 		// Intenta resolver o mejorar con el nuevo número, sin pasarse
+		#ifndef GRUPOS
 		if ((meta-resultado) < (meta-mejor) && (meta-resultado)>=0) {
 		    mejor = resultado;
 		    mejor_operaciones = operaciones;
@@ -97,7 +122,14 @@ bool Cifras::resuelve_rec (int meta) {
 		    if (resultado == meta)
 			return true;
 		}
+		#endif
 		
+		// Marca el nuevo resultado y comprueba si están todos marcados
+		#ifdef GRUPOS
+		if (marcar(resultado))
+		    return true;
+		#endif
+
 		// Guarda el nuevo resultado
 		numeros.push_back(resultado);
 		
@@ -105,8 +137,10 @@ bool Cifras::resuelve_rec (int meta) {
 		    return true;
 		
 		// Saco resultado y operaciones
+		#ifndef GRUPOS
 		numeros.pop_back();
 		operaciones.pop_back();
+		#endif
 	    }
 	   
        	    numeros.insert(numeros.begin()+j,b);
@@ -118,8 +152,31 @@ bool Cifras::resuelve_rec (int meta) {
     return false;
 }
 
-
+#ifndef GRUPOS
 void Cifras::escribeOperaciones() {
     for(vector<string>::iterator it=mejor_operaciones.begin(); it!=mejor_operaciones.end(); it++)
 	cout << *it << "\n";
 }
+#endif
+
+#ifdef GRUPOS
+bool Cifras::marcar(int n) {
+    if (n<1000 and !encontrado[n]) {
+	encontrado[n] = true;
+	--total_encontrados;
+	if (total_encontrados == BUSCADOS)
+	    return true;
+    }
+    
+    return false;
+}
+#endif
+
+#ifdef GRUPOS
+void Cifras::imprime_restantes () {
+    for (int i=0; i<BUSCADOS; ++i)
+	if (!encontrado[i])
+	    cout << i << ' ';
+    cout << endl;
+}
+#endif

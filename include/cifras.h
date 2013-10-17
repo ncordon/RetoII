@@ -45,9 +45,14 @@ private:
      * @brief Resuelve recursivamente para un número dado.
      * @return Verdadero si hay solución.
      */
-    bool resuelve_rec (int meta);
+    bool resuelve_rec (int meta = 0);
 
 #ifdef GRUPOS
+    /**
+     * Número hasta el que se busca.
+     */
+    static const int BUSCADOS = 1000;
+
     /**
      * @brief Vector que contiene los números de 3 cifras.
      * Verdadero si el número ya ha sido encontrado.
@@ -58,9 +63,23 @@ private:
      * @brief Número de números encontrados actualmente
      */
     int total_encontrados;
+    
+    /**
+     * Marca como encontrado el número n.
+     * @param Número a marcar como encontrado.
+     * @return Verdadero si ha encontrado todos.
+     */
+    bool marcar (int n);
 #endif
 
 public:
+    #ifdef GRUPOS
+    /**
+     * Imprime los que faltan por marcar
+     */
+    void imprime_restantes ();
+    #endif
+
     /**
      * @brief Constructor. Selecciona un conjunto de números aleatorio.
      * Entre los números [1,2,3,4,5,6,7,8,9,10,25,50,75,100], escoge seis.
@@ -93,7 +112,7 @@ public:
      * @param meta Número buscado.
      * @return Verdadero si hay solución.
      */
-    bool resuelve (int meta);
+    bool resuelve (int meta = 0);
 };
 
 const std::string SIMBOLOS = "-/+*";

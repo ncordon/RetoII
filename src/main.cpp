@@ -19,19 +19,36 @@ vector<int> leerNumeros () {
 
 int main() {
     // Lee números
-    int meta; 
+    #ifndef GRUPOS
+    int meta;
     cout << "Introduce meta a resolver: ";
     cin >> meta;
+    #endif
+
     cout << "Introduce números: ";
     vector<int> leidos (leerNumeros());
     
     // Resuelve el problema
     cout << "Resolviendo..." << endl;
     Cifras cifras(leidos);
-    if (cifras.resuelve(meta))    
+
+    #ifndef GRUPOS
+    if (cifras.resuelve(meta))
         cout << "Solución" << endl;
     else
         cout << "Aproximación" << endl;
     
     cifras.escribeOperaciones();
+    #endif
+
+    #ifdef GRUPOS
+    if (cifras.resuelve())
+	cout << "Marcados todos" << endl;
+    else {
+	cout << "Faltaron por marcar:" << endl;
+	cifras.imprime_restantes();
+    }
+    #endif
+
+    
 }
