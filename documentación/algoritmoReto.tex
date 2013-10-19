@@ -128,4 +128,50 @@
    \end{algorithmic}
    \caption{ALGORITMO DE CÁLCULO DEL NÚMERO DE 3 CIFRAS}
    \end{algorithm}
+   
+   \newpage
+   % Recreo el algoritmo intentando usar el más alto nivel posible.
+   
+   \begin{algorithm}[H]
+   \begin{algorithmic}[1]
+   \REQUIRE \ \\
+	    \C++{meta}, número a aproximar\\
+	    \C++{números}, enteros aleatorios iniciales del conjunto\\
+            \C++{size}, número de posiciones de la lista \C++{números}    
+            
+   \ENSURE \ \\
+	   \TRUE si logramos alcanzar exactamente \C++{meta} \\
+	   \FALSE {si sólo logramos una aproximación \C++{aprox} a \C++{meta}}
+   
+   % Falta comentar el caso base de la inducción
+   \STATE { Inicializa \C++{mejor\_aprox} a -1. } 
+   \FOR{cada pareja ordenada \C++{(a,b)} en \C++{números}}
+   \STATE{ 
+      \FOR{cada operación \C++{op} en \C++{[+,*,-,/]}} 
+	  \IF { \C++{a (op) b} es posible }
+	    \STATE { Computa la \C++{cuenta} }
+	    \STATE { Almacena la cuenta en la pila de cuentas }
+	    \STATE { Retira \C++{a,b} del conjunto de números }
+	    \STATE { Introduce \C++{a (op) b} en el conjunto de números }
+	    \IF { $\C++{meta - a (op) b} \leq \C++{meta - mejor\_aprox}$  }
+	      \STATE {$\C++{mejor\_aprox := meta}$}
+	      \IF {$\C++{mejor\_aprox == meta}$}
+		\RETURN \TRUE
+	      \ENDIF
+	    \ENDIF
+	    \IF { llamamos recursivamente al algoritmo sobre \C++{números} y devuelve \TRUE }
+	      \RETURN \TRUE
+	    \ENDIF
+	    \STATE { Retira la \C++{cuenta} de la pila de cuentas }
+	    \STATE { Retira \C++{a (op) b} del conjunto de números }
+	    \STATE { Reintroduce \C++{a,b} en el conjunto de números }
+	  \ENDIF
+      \ENDFOR
+    }
+   \ENDFOR
+   \end{algorithmic}
+   \caption{ALGORITMO DE CÁLCULO DEL NÚMERO DE 3 CIFRAS}
+   \end{algorithm}
+   % Falta comentar cómo después se usaría la cola de operaciones para imprimir
+   % Falta comentar cómo las operaciones para la mejor operación se copian a cada paso
 \end{document}
