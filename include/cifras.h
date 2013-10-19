@@ -159,7 +159,7 @@ public:
     #endif
 };
 
-const std::string SIMBOLOS = "-/+*";
+const char SIMBOLOS[] = "-/+*";
 
 
 /**
