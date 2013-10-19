@@ -84,9 +84,8 @@ bool Cifras::resuelve_rec (int meta, int size) {
 	// Toma el segundo número disponible
 	for (int j=i; j<size-1; ++j) {
 	    int b = numeros[j];
-      
-	    if (!(b==0))
-		numeros[j]=numeros[size-2];
+	    if (b != 0)
+		numeros[j] = numeros[size-2];
 	    else
 		continue;
       
@@ -109,18 +108,12 @@ bool Cifras::resuelve_rec (int meta, int size) {
 		    continue;
           
 		// Calcula y guarda la operación.
-                #ifndef GRUPOS
-		/*opActual.primero = c;
-		opActual.operador = SIMBOLOS[op];
-		opActual.segundo = d;
-		opActual.resultado = resultado;*/
-		
+                #ifndef GRUPOS		
 		opActual = {c, d, SIMBOLOS[op], resultado};
-		
 		operaciones.push_back(opActual);
             
 		// Intenta resolver o mejorar con el nuevo número, sin pasarse
-		if ((meta-resultado) < (meta-mejor) && (meta-resultado)>=0) {
+		if ((meta-resultado) < (meta-mejor) && (meta-resultado) >= 0) {
 		    mejor = resultado;
 		    mejor_operaciones = operaciones;
           
@@ -135,15 +128,13 @@ bool Cifras::resuelve_rec (int meta, int size) {
 		    return true;
                 #endif
               
-		// Guarda el nuevo resultado
-		numeros[size-2]=resultado;
-        
+		// Guarda el nuevo resultado y sigue buscando
+		numeros[size-2] = resultado;
 		if (resuelve_rec(meta,size-1))
 		    return true;
         
-		// Saco resultado y operaciones
+		// Saco resultado
 		numeros.pop_back();
-        
                 #ifndef GRUPOS
 		//Saca las operaciones
 		operaciones.pop_back();
@@ -202,21 +193,21 @@ bool Cifras::todos_marcados () {
 
 #ifndef GRUPOS
 void Cifras::normalizaOperaciones() {
-    int size=mejor_operaciones.size();
-    int pos_escribir=size-2;
-  
+    int size = mejor_operaciones.size();
+    int pos_escribir = size - 2;
+    
     if (pos_escribir >= 0){
 	buscaOperandos (mejor_operaciones[size-1].primero,
 			mejor_operaciones[size-1].segundo,pos_escribir);
   
 	mejor_operaciones.erase(mejor_operaciones.begin(),
-				mejor_operaciones.begin()+pos_escribir+1);   
+				mejor_operaciones.begin() + pos_escribir + 1);   
     }
 }
 
 void Cifras::buscaOperandos(int un_operando, int otro_operando, int& pos_escribir){
     bool uno_encontrado=false, otro_encontrado=false;
-    int j=pos_escribir;
+    int j = pos_escribir;
   
     while ((!uno_encontrado || !otro_encontrado) && j>=0){
 	if ((mejor_operaciones[j].resultado == un_operando) || 
@@ -234,7 +225,7 @@ void Cifras::buscaOperandos(int un_operando, int otro_operando, int& pos_escribi
       
 	    buscaOperandos(mejor_operaciones[pos_escribir+1].primero,
 			   mejor_operaciones[pos_escribir+1].segundo, pos_escribir);
-	    j=pos_escribir;
+	    j = pos_escribir;
 	}
 	else
 	    j--;
