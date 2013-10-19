@@ -5,7 +5,7 @@
 \usepackage{algorithmic}
 \input{spanishAlgorithmic.tex}  % Variables de entorno en español
 
-\newcommand{\objeto}[4]{\underline{\textbf{TDA #1}}
+\newcommand{\objeto}[4]{\noindent\underline{\textbf{TDA #1}}
             \begin{center}\begin{tabular}{|p{7cm}|}
                  \hline
                  \multicolumn{1}{|c|}{\texttt{#1}}\\
@@ -29,6 +29,19 @@
 \date{}
 \begin{document}
 \maketitle
+
+\objeto{Cuenta}{}{
+        \C++{+ primero}\\
+        \C++{+ segundo}\\
+        \C++{+ operador}\\
+        \C++{+ resultado}
+    }{
+        \item \C++{primero} Número entero, representando el primer operando.
+        \item \C++{segundo} Número entero, que representa el segundo operando.
+        \item \C++{operador} Carácter que corresponde a la operación realizada sobre los números.
+        \item \C++{resultado} Número entero, resultado de realizar la operación sobre \C++{primero} y \C++{segundo}.
+    }
+
 
     \objeto{DobleCola}{\C++{-- double\_queue}}
                 {\C++{+ push\_back()}\\

@@ -118,10 +118,8 @@ bool Cifras::resuelve_rec (int meta, int size) {
 		opActual = {c, d, SIMBOLOS[op], resultado};
 		
 		operaciones.push_back(opActual);
-                #endif
             
 		// Intenta resolver o mejorar con el nuevo número, sin pasarse
-                #ifndef GRUPOS
 		if ((meta-resultado) < (meta-mejor) && (meta-resultado)>=0) {
 		    mejor = resultado;
 		    mejor_operaciones = operaciones;
