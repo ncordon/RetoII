@@ -35,8 +35,9 @@ bool Cifras::resuelve (int meta) {
     for (vector<int>::iterator it = numeros.begin(); it != numeros.end(); ++it) {
         #ifndef GRUPOS
 	if (*it == meta) {
-	    vector <string> encontrado; encontrado.push_back(aString(meta));
-	    mejor_operaciones.push_back(encontrado);
+	    /*vector <string> encontrado;
+	    encontrado.push_back(aString(meta));
+	    mejor_operaciones.push_back();*/
 	    return true;
 	}
         #endif
@@ -65,7 +66,7 @@ bool Cifras::resuelve_rec (int meta, int size) {
 	[](int a, int b){ return a*b; }
     };
   
-    vector <string> opActual;
+    Cuenta opActual;
   
     if (size < 2) return false;
   
@@ -89,7 +90,6 @@ bool Cifras::resuelve_rec (int meta, int size) {
       
 	    // Y prueba sobre ellos todas las operaciones
 	    for (int op=0; op<NOP; ++op) {
-		opActual.clear();
 		// Cogemos siempre c como el mayor de ambos
 		int c=(a>b?a:b), d=(c==a?b:a);
         
@@ -108,11 +108,13 @@ bool Cifras::resuelve_rec (int meta, int size) {
           
 		// Calcula y guarda la operación.
                 #ifndef GRUPOS
-		opActual.push_back(aString(c));
-		opActual.push_back(aString(SIMBOLOS[op]));
-		opActual.push_back(aString(d));
-		opActual.push_back("=");
-		opActual.push_back(aString(resultado));
+		/*opActual.primero = c;
+		opActual.operador = SIMBOLOS[op];
+		opActual.segundo = d;
+		opActual.resultado = resultado;*/
+		
+		opActual = {c, d, SIMBOLOS[op], resultado};
+		
 		operaciones.push_back(opActual);
                 #endif
             
@@ -158,13 +160,11 @@ bool Cifras::resuelve_rec (int meta, int size) {
 
 #ifndef GRUPOS
 void Cifras::escribeOperaciones() {    
-    vector<vector<string>>::iterator it;
-    vector<string>::iterator it2;
+    //vector<vector<string>>::iterator it;
+    vector<Cuenta>::iterator it;
   
     for(it=mejor_operaciones.begin(); it!=mejor_operaciones.end(); it++){
-	for (it2=(*it).begin(); it2 != (*it).end(); it2++)
-	    cout << *it2;
-	cout << endl;
+	cout << *it << endl;
     }
 }
 #endif
@@ -206,38 +206,44 @@ void Cifras::normalizaOperaciones() {
     int pos_escribir=size-2;
   
     if (pos_escribir >= 0){
-	buscaOperandos (mejor_operaciones[size-1][0],
-			mejor_operaciones[size-1][2],pos_escribir);
+	buscaOperandos (mejor_operaciones[size-1].primero,
+			mejor_operaciones[size-1].segundo,pos_escribir);
   
 	mejor_operaciones.erase(mejor_operaciones.begin(),
 				mejor_operaciones.begin()+pos_escribir+1);   
     }
 }
 
-void Cifras::buscaOperandos(string un_operando, string otro_operando, int& pos_escribir){
+void Cifras::buscaOperandos(int un_operando, int otro_operando, int& pos_escribir){
     bool uno_encontrado=false, otro_encontrado=false;
     int j=pos_escribir;
   
     while ((!uno_encontrado || !otro_encontrado) && j>=0){
-	if ((mejor_operaciones[j][4] == un_operando) || 
-	    (mejor_operaciones[j][4] == otro_operando)){
+	if ((mejor_operaciones[j].resultado == un_operando) || 
+	    (mejor_operaciones[j].resultado == otro_operando)){
       
 	    if (uno_encontrado)
 		otro_encontrado=true;
 	    else
 		uno_encontrado=true;
 
-	    vector <string> aux(mejor_operaciones[j]);
+	    Cuenta aux(mejor_operaciones[j]);
 	    mejor_operaciones[j]=mejor_operaciones[pos_escribir];
 	    mejor_operaciones[pos_escribir]=aux;
 	    pos_escribir--;
       
-	    buscaOperandos(mejor_operaciones[pos_escribir+1][0],
-			   mejor_operaciones[pos_escribir+1][2], pos_escribir);
+	    buscaOperandos(mejor_operaciones[pos_escribir+1].primero,
+			   mejor_operaciones[pos_escribir+1].segundo, pos_escribir);
 	    j=pos_escribir;
 	}
 	else
 	    j--;
     }
+}
+
+
+std::ostream& operator<<(std::ostream& salida, const Cifras::Cuenta& operacion) {
+    salida << operacion.primero << operacion.operador << operacion.segundo << '=' << operacion.resultado;
+    return salida;
 }
 #endif

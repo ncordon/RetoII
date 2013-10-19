@@ -9,6 +9,13 @@
 
 class Cifras {
 private:
+    struct Cuenta {
+        int primero;
+	int segundo;
+	char operador;
+	int resultado;
+    };
+    
     /**
      * Cola/Pila con los números que deben ser probados.
      */
@@ -19,14 +26,14 @@ private:
      * Pila en la que se guardan las operaciones que se han realizado,
      * para mostrarlas luego por pantalla.
      */
-    std::vector<std::vector <std::string>> operaciones;
+    std::vector<Cuenta> operaciones;
   
     /**
      * Almacena la mejor aproximación hasta el momento y las operaciones
      * que requiere llegar a ese resultado.
      */
     int mejor;
-    std::vector<std::vector <std::string>> mejor_operaciones;
+    std::vector<Cuenta> mejor_operaciones;
   
     /**
      * @brief Normalizador de operaciones realizadas
@@ -45,7 +52,7 @@ private:
      * las mismas, y las apila a partir de pos_escribir 
      * 
      */
-    void buscaOperandos(std::string un_operando, std::string otro_operando, 
+    void buscaOperandos(int un_operando, int otro_operando, 
 			int& pos_escribir);
   
 #endif
@@ -137,6 +144,8 @@ public:
      * @return Verdadero si hay solución.
      */
     bool resuelve (int meta = 0);
+    
+    friend std::ostream& operator<<(std::ostream& salida, const Cifras::Cuenta& operacion);
 };
 
 const std::string SIMBOLOS = "-/+*";
