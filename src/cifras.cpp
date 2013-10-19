@@ -202,7 +202,7 @@ bool Cifras::todos_marcados () {
 }
 #endif
 
-
+#ifndef GRUPOS
 void Cifras::normalizaOperaciones() {
   int size=mejor_operaciones.size();
   int pos_escribir=size-2;
@@ -242,3 +242,4 @@ void Cifras::buscaOperandos(string un_operando, string otro_operando, int& pos_e
       j--;
   }
 }
+#endif
