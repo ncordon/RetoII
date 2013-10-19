@@ -71,7 +71,7 @@
    operaciones posibles aplicables}       
    
    
-   \begin{algorithm}[H]
+   \begin{algorithm}
    \begin{algorithmic}[1]
    \REQUIRE \C++{meta} número a aproximar\\
             \C++{size}, número de posiciones de la lista \C++{numeros}
@@ -83,35 +83,18 @@
    \STATE{Devolvemos \FALSE}
    \ENDIF
    
-   \FOR{\C++{i} desde la primera posición de la lista, hasta la anterior a la 
+   \FOR{la primera posición de la lista, hasta la anterior a la 
         última (\C++{size})}
-    \STATE {Tomamos \C++{a} como el número ocupando la posición $i$-ésima 
-    de la lista}
+   \STATE {Tomamos \C++{a} como el primer número de la lista}
    \IF{$a\neq 0$}
-    \STATE{sobreescribimos la posición que ocupaba \C++{a}
+   \STATE{sobreescribimos la posición que ocupaba \C++{a}
    con lo que haya en la última posición de la lista}
    \ELSE
-    \STATE{Avanzamos a la iteración siguiente}
+   \STATE{Avanzamos a la iteración siguiente}
+  
    \ENDIF
-   \FOR{\C++{j} desde \C++{i} hasta \C++{size-1}}
-    \STATE {Tomamos \C++{b} como el número que ocupa la posición $j$-ésima
-    de la lista}
-    \IF{$b\neq 0$}
-      \STATE{sobreescribimos la posición que ocupaba \C++{b}
-    con lo que haya en la penúltima posición de la lista}
-    \ELSE
-      \STATE{Avanzamos a la iteración siguiente}
-    \ENDIF
-    
-    \FOR{operación \C++{OP} en ${/,-,+,*}$}
-    \STATE{Tomamos \C++{c} como el mayor de \C++{a} y \C++{b},
-    y \C++{d} como el menor de ambos}
-    \ENDFOR
-    
-   \ENDFOR
-    
    \ENDFOR
    \end{algorithmic}
-   \caption{ALGORITMO DE CÁLCULO DEL NÚMERO DE 3 CIFRAS}
+
    \end{algorithm}
 \end{document}
