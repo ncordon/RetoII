@@ -4,242 +4,240 @@ typedef int (*Operacion)(int a, int b);
 
 
 Cifras::Cifras (vector<int> introducidos) {
-  #ifndef GRUPOS
-  // Primera aproximación
-  mejor = -1;
-  #endif
+    #ifndef GRUPOS
+    // Primera aproximación
+    mejor = -1;
+    #endif
   
-  #ifdef GRUPOS
-  // Números marcados
-  total_encontrados = 0;
-  vector<bool> encontrado_inicial(BUSCADOS);
-  for (int i=0; i<BUSCADOS; ++i)
-    encontrado_inicial[i] = false;
-  encontrado = encontrado_inicial;
+    #ifdef GRUPOS
+    // Números marcados
+    total_encontrados = 0;
+    vector<bool> encontrado_inicial(BUSCADOS);
+    for (int i=0; i<BUSCADOS; ++i)
+	encontrado_inicial[i] = false;
+    encontrado = encontrado_inicial;
   
-  // El cero se marca por defecto
-  marcar(0);
-  #endif
+    // El cero se marca por defecto
+    marcar(0);
+    #endif
   
-  // Introduce los números en la doble cola.
-  vector<int> numeros;
-  int size = introducidos.size();
-  for (int i=0; i<size; ++i)
-    numeros.push_back(introducidos[i]);
+    // Introduce los números en la doble cola.
+    vector<int> numeros;
+    int size = introducidos.size();
+    for (int i=0; i<size; ++i)
+	numeros.push_back(introducidos[i]);
   
-  this->numeros = numeros;
+    this->numeros = numeros;
 }
 
 bool Cifras::resuelve (int meta) {
-  // Empieza comprobando que el número buscado no esté entre los dados.
-  for (vector<int>::iterator it = numeros.begin(); it != numeros.end(); ++it) {
+    // Empieza comprobando que el número buscado no esté entre los dados.
+    for (vector<int>::iterator it = numeros.begin(); it != numeros.end(); ++it) {
+        #ifndef GRUPOS
+	if (*it == meta) {
+	    vector <string> encontrado; encontrado.push_back(aString(meta));
+	    mejor_operaciones.push_back(encontrado);
+	    return true;
+	}
+        #endif
     
-    #ifndef GRUPOS
-    if (*it == meta) {
-      vector <string> encontrado; encontrado.push_back(aString(meta));
-      mejor_operaciones.push_back(encontrado);
-      return true;
+        #ifdef GRUPOS
+	marcar(*it);
+        #endif
     }
+  
+    // Resuelve de forma recursiva todas las posibilidades.
+    bool resuelto=resuelve_rec(meta, numeros.size());
+  
+    #ifndef GRUPOS
+    normalizaOperaciones();
     #endif
-    
-    #ifdef GRUPOS
-    marcar(*it);
-    #endif
-    
-  }
   
-  // Resuelve de forma recursiva todas las posibilidades.
-  bool resuelto=resuelve_rec(meta, numeros.size());
-  
-  #ifndef GRUPOS
-  normalizaOperaciones();
-  #endif
-  
-  return resuelto;
+    return resuelto;
 }
 
 bool Cifras::resuelve_rec (int meta, int size) {
-  // Operaciones
-  Operacion calcula[] = {
-    [](int a, int b){ return a-b; },
-    [](int a, int b){ return a/b; },
-    [](int a, int b){ return a+b; },
-    [](int a, int b){ return a*b; }
-  };
+    // Operaciones
+    Operacion calcula[] = {
+	[](int a, int b){ return a-b; },
+	[](int a, int b){ return a/b; },
+	[](int a, int b){ return a+b; },
+	[](int a, int b){ return a*b; }
+    };
   
-  vector <string> opActual;
+    vector <string> opActual;
   
-  if (size < 2) return false;
+    if (size < 2) return false;
   
-  // Toma el primer número disponible
-  for (int i=0; i<size-1; ++i) {
-    int a = numeros[i];
+    // Toma el primer número disponible
+    for (int i=0; i<size-1; ++i) {
+	int a = numeros[i];
     
-    if (!(a==0))
-      numeros[i]=numeros[size-1];
-    else
-      continue;
+	if (!(a==0))
+	    numeros[i]=numeros[size-1];
+	else
+	    continue;
     
-    // Toma el segundo número disponible
-    for (int j=i; j<size-1; ++j) {
-      int b = numeros[j];
+	// Toma el segundo número disponible
+	for (int j=i; j<size-1; ++j) {
+	    int b = numeros[j];
       
-      if (!(b==0))
-        numeros[j]=numeros[size-2];
-      else
-        continue;
+	    if (!(b==0))
+		numeros[j]=numeros[size-2];
+	    else
+		continue;
       
-      // Y prueba sobre ellos todas las operaciones
-      for (int op=0; op<NOP; ++op) {
-        opActual.clear();
-        // Cogemos siempre c como el mayor de ambos
-        int c=(a>b?a:b), d=(c==a?b:a);
+	    // Y prueba sobre ellos todas las operaciones
+	    for (int op=0; op<NOP; ++op) {
+		opActual.clear();
+		// Cogemos siempre c como el mayor de ambos
+		int c=(a>b?a:b), d=(c==a?b:a);
         
-        // Comprueba que la operación sea válida
-        bool indivisible = ((c%d != 0) and op==DIV);
-        if (indivisible)
-          continue;
+		// Comprueba que la operación sea válida
+		bool indivisible = ((c%d != 0) and op==DIV);
+		if (indivisible)
+		    continue;
         
-        // Comprueba que la operación sea útil
-        int resultado = calcula[op](c,d);
-        bool trivial = (resultado == a or resultado == b);
-        bool zero = (resultado == 0);
-        bool overflow = (resultado < 0);
-        if (trivial or overflow or zero)
-          continue;
+		// Comprueba que la operación sea útil
+		int resultado = calcula[op](c,d);
+		bool trivial = (resultado == a or resultado == b);
+		bool zero = (resultado == 0);
+		bool overflow = (resultado < 0);
+		if (trivial or overflow or zero)
+		    continue;
           
-        // Calcula y guarda la operación.
-        #ifndef GRUPOS
-        opActual.push_back(aString(c));
-        opActual.push_back(aString(SIMBOLOS[op]));
-        opActual.push_back(aString(d));
-        opActual.push_back("=");
-        opActual.push_back(aString(resultado));
-        operaciones.push_back(opActual);
-        #endif
+		// Calcula y guarda la operación.
+                #ifndef GRUPOS
+		opActual.push_back(aString(c));
+		opActual.push_back(aString(SIMBOLOS[op]));
+		opActual.push_back(aString(d));
+		opActual.push_back("=");
+		opActual.push_back(aString(resultado));
+		operaciones.push_back(opActual);
+                #endif
             
-        // Intenta resolver o mejorar con el nuevo número, sin pasarse
-        #ifndef GRUPOS
-        if ((meta-resultado) < (meta-mejor) && (meta-resultado)>=0) {
-          mejor = resultado;
-          mejor_operaciones = operaciones;
+		// Intenta resolver o mejorar con el nuevo número, sin pasarse
+                #ifndef GRUPOS
+		if ((meta-resultado) < (meta-mejor) && (meta-resultado)>=0) {
+		    mejor = resultado;
+		    mejor_operaciones = operaciones;
           
-          if (resultado == meta)
-            return true;
-        }
-        #endif
+		    if (resultado == meta)
+			return true;
+		}
+                #endif
         
-        // Marca el nuevo resultado y comprueba si están todos marcados
-        #ifdef GRUPOS
-        if (marcar(resultado))
-          return true;
-        #endif
+		// Marca el nuevo resultado y comprueba si están todos marcados
+                #ifdef GRUPOS
+		if (marcar(resultado))
+		    return true;
+                #endif
               
-        // Guarda el nuevo resultado
-        numeros[size-2]=resultado;
+		// Guarda el nuevo resultado
+		numeros[size-2]=resultado;
         
-        if (resuelve_rec(meta,size-1))
-          return true;
+		if (resuelve_rec(meta,size-1))
+		    return true;
         
-        // Saco resultado y operaciones
-        numeros.pop_back();
+		// Saco resultado y operaciones
+		numeros.pop_back();
         
-        #ifndef GRUPOS
-        //Saca las operaciones
-        operaciones.pop_back();
-        #endif
-      }
-      numeros[size-2]=numeros[j];
-      numeros[j]=b;
+                #ifndef GRUPOS
+		//Saca las operaciones
+		operaciones.pop_back();
+                #endif
+	    }
+	    numeros[size-2]=numeros[j];
+	    numeros[j]=b;
+	}
+	numeros[size-1]=numeros[i];
+	numeros[i]=a;
     }
-    numeros[size-1]=numeros[i];
-    numeros[i]=a;
-  }
-  return false;
+    return false;
 }
 
 #ifndef GRUPOS
 void Cifras::escribeOperaciones() {    
-  vector<vector<string>>::iterator it;
-  vector<string>::iterator it2;
+    vector<vector<string>>::iterator it;
+    vector<string>::iterator it2;
   
-  for(it=mejor_operaciones.begin(); it!=mejor_operaciones.end(); it++){
-    for (it2=(*it).begin(); it2 != (*it).end(); it2++)
-      cout << *it2;
-    cout << endl;
-  }
+    for(it=mejor_operaciones.begin(); it!=mejor_operaciones.end(); it++){
+	for (it2=(*it).begin(); it2 != (*it).end(); it2++)
+	    cout << *it2;
+	cout << endl;
+    }
 }
 #endif
 
 #ifdef GRUPOS
 bool Cifras::marcar(int n) {
-  if (n<1000 and !encontrado[n]) {
-    encontrado[n] = true;
-    --total_encontrados;
-    if (total_encontrados == BUSCADOS)
-      return true;
-  }
+    if (n<1000 and !encontrado[n]) {
+	encontrado[n] = true;
+	--total_encontrados;
+	if (total_encontrados == BUSCADOS)
+	    return true;
+    }
   
-  return false;
+    return false;
 }
 #endif
 
 #ifdef GRUPOS
 void Cifras::imprime_restantes () {
-  for (int i=0; i<BUSCADOS; ++i)
-    if (!encontrado[i])
-      cout << i << ' ';
+    for (int i=0; i<BUSCADOS; ++i)
+	if (!encontrado[i])
+	    cout << i << ' ';
     cout << endl;
 }
 #endif
 
 #ifdef GRUPOS
 bool Cifras::todos_marcados () {
-  bool todos = true;
-  for (int i=0; i<BUSCADOS and todos; ++i)
-    todos = encontrado[i];
-  return todos;
+    bool todos = true;
+    for (int i=0; i<BUSCADOS and todos; ++i)
+	todos = encontrado[i];
+    return todos;
 }
 #endif
 
 #ifndef GRUPOS
 void Cifras::normalizaOperaciones() {
-  int size=mejor_operaciones.size();
-  int pos_escribir=size-2;
+    int size=mejor_operaciones.size();
+    int pos_escribir=size-2;
   
-  if (pos_escribir >= 0){
-    buscaOperandos (mejor_operaciones[size-1][0],
-                    mejor_operaciones[size-1][2],pos_escribir);
+    if (pos_escribir >= 0){
+	buscaOperandos (mejor_operaciones[size-1][0],
+			mejor_operaciones[size-1][2],pos_escribir);
   
-    mejor_operaciones.erase(mejor_operaciones.begin(),
-                            mejor_operaciones.begin()+pos_escribir+1);   
-  }
+	mejor_operaciones.erase(mejor_operaciones.begin(),
+				mejor_operaciones.begin()+pos_escribir+1);   
+    }
 }
 
 void Cifras::buscaOperandos(string un_operando, string otro_operando, int& pos_escribir){
-  bool uno_encontrado=false, otro_encontrado=false;
-  int j=pos_escribir;
+    bool uno_encontrado=false, otro_encontrado=false;
+    int j=pos_escribir;
   
-  while ((!uno_encontrado || !otro_encontrado) && j>=0){
-    if ((mejor_operaciones[j][4] == un_operando) || 
-      (mejor_operaciones[j][4] == otro_operando)){
+    while ((!uno_encontrado || !otro_encontrado) && j>=0){
+	if ((mejor_operaciones[j][4] == un_operando) || 
+	    (mejor_operaciones[j][4] == otro_operando)){
       
-      if (uno_encontrado)
-        otro_encontrado=true;
-      else
-        uno_encontrado=true;
+	    if (uno_encontrado)
+		otro_encontrado=true;
+	    else
+		uno_encontrado=true;
 
-      vector <string> aux(mejor_operaciones[j]);
-      mejor_operaciones[j]=mejor_operaciones[pos_escribir];
-      mejor_operaciones[pos_escribir]=aux;
-      pos_escribir--;
+	    vector <string> aux(mejor_operaciones[j]);
+	    mejor_operaciones[j]=mejor_operaciones[pos_escribir];
+	    mejor_operaciones[pos_escribir]=aux;
+	    pos_escribir--;
       
-      buscaOperandos(mejor_operaciones[pos_escribir+1][0],
-                      mejor_operaciones[pos_escribir+1][2], pos_escribir);
-      j=pos_escribir;
+	    buscaOperandos(mejor_operaciones[pos_escribir+1][0],
+			   mejor_operaciones[pos_escribir+1][2], pos_escribir);
+	    j=pos_escribir;
+	}
+	else
+	    j--;
     }
-    else
-      j--;
-  }
 }
 #endif

@@ -49,6 +49,4 @@ int main() {
 	cifras.imprime_restantes();
     }
     #endif
-
-    
 }
