@@ -65,8 +65,10 @@ bool Cifras::resuelve_rec (int meta, int size) {
 	[](int a, int b){ return a+b; },
 	[](int a, int b){ return a*b; }
     };
-  
+    
+    #ifndef GRUPOS
     Cuenta opActual;
+    #endif
   
     if (size < 2) return false;
   

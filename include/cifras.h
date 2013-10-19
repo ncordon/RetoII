@@ -9,12 +9,6 @@
 
 class Cifras {
 private:
-    struct Cuenta {
-        int primero;
-	int segundo;
-	char operador;
-	int resultado;
-    };
     
     /**
      * Cola/Pila con los números que deben ser probados.
@@ -22,6 +16,18 @@ private:
     std::vector<int> numeros;
   
 #ifndef GRUPOS
+    /**
+     * TDA Cuenta. Representa una operación binaria, concretamente
+     * una suma, resta, multiplicación o división. Permite además
+     * almacenar el resultado.
+     */
+    struct Cuenta {
+        int primero;
+        int segundo;
+        char operador;
+        int resultado;
+    };
+    
     /**
      * Pila en la que se guardan las operaciones que se han realizado,
      * para mostrarlas luego por pantalla.
@@ -145,7 +151,12 @@ public:
      */
     bool resuelve (int meta = 0);
     
+    #ifndef GRUPOS
+    /**
+     * Sobrecarga del operador << para salida de datos del TDA Cuenta
+     */
     friend std::ostream& operator<<(std::ostream& salida, const Cifras::Cuenta& operacion);
+    #endif
 };
 
 const std::string SIMBOLOS = "-/+*";
