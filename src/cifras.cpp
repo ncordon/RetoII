@@ -133,7 +133,6 @@ bool Cifras::resuelve_rec (int meta, int size) {
 		if (resuelve_rec(meta,size-1))
 		    return true;
         
-		// Saco resultado
                 #ifndef GRUPOS
 		//Saca las operaciones
 		operaciones.pop_back();
