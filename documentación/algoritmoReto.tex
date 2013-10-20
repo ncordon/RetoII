@@ -4,8 +4,9 @@
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \input{spanishAlgorithmic.tex}  % Variables de entorno en español
+\setlength{\parindent}{0cm}
 
-\newcommand{\objeto}[4]{\noindent\underline{\textbf{TDA #1}}
+\newcommand{\objeto}[4]{\indent\underline{\textbf{TDA #1}}
             \begin{center}\begin{tabular}{|p{7cm}|}
                  \hline
                  \multicolumn{1}{|c|}{\texttt{#1}}\\
@@ -30,6 +31,20 @@
 \begin{document}
 \maketitle
 
+Se emplea la siguiente notación genérica para la representación 
+de un TDA abstracto:\\
+
+\objeto{MiTDA}{
+		\C++{- datos privados}\\
+		\C++{- métodos privados}
+	}{
+		\C++{+ datos accesibles a través de la interfaz}\\
+		\C++{+ métodos invocables desde la interfaz}
+	}{\item Descripciones sobre el TDA}
+
+\bigskip
+Los TDA empleados en la resolución del problema de las cifras han sido:\\
+
 \objeto{Cuenta}{}{
         \C++{+ primero}\\
         \C++{+ segundo}\\
@@ -41,137 +56,138 @@
         \item \C++{operador} Carácter que corresponde a la operación realizada sobre los números.
         \item \C++{resultado} Número entero, resultado de realizar la operación sobre \C++{primero} y \C++{segundo}.
     }
-
-
-    \objeto{DobleCola}{\C++{-- double\_queue}}
-                {\C++{+ push\_back()}\\
-                 \C++{+ pop\_back()}\\
-                 \C++{+ push\_front()}\\
-                 \C++{+ pop\_front()}\\
-                 \C++{+ front()}\\
-                 \C++{+ back()}}{
- \item \C++{double\_queue} Vector de objetos \T_ que es usado por
-  el TDA \C++{DobleCola} como una doble cola enlazada (en la que
-  se puede suprimir e introducir elementos por ambos lados)
- \item \C++{push\_back()} Introduce un elemento \T_ en la cola de
-  \C++{double\_queue}
- \item \C++{pop\_back()} Saca un elemento \T_ de la cola de 
-  \C++{double\_queue}
- \item \C++{push\_back()} Introduce un elemento \T_ en el frente
-  de \C++{push\_back()}
- \item \C++{pop\_back()} Saca un elemento \T_ del frente de 
-  \C++{push\_back()}}  
-  
- \objeto{ProblemaCifras}{\C++{-- numerosIniciales}\\
-                        \C++{-- DobleCola numeros}\\
-                        \C++{-- DobleCola operaciones}\\
-                        \C++{-- meta}\\
-                        \C++{-- operacionesPosibles}\\
+ %\newpage 
+ \objeto{ProblemaCifras}{\C++{- numerosIniciales}\\
+                        \C++{- numeros}\\
+                        \C++{- operaciones}\\
+                        \C++{- meta}\\
+                        \C++{- operacionesPosibles}\\
                         }
                         {\C++{+ opera()}\\
                         \C++{+ resuelve()}}{
   \item \C++{numerosIniciales} Conjunto que almacena los enteros
-   a partir de los que se pretende obtener meta
-  \item \C++{numeros} Instancia de \C++{DobleCola} en la que se
-   almacenan los números con los que se opera en cada llamada
-   a \C++{resuelve()}
-  \item \C++{operaciones} Instancia de \C++{DobleCola} en la que
-   se almacenarán las operaciones realizadas hasta llegar a meta,
-   o a una aproximación a meta
+   a partir de los que se pretende obtener \C++{meta}
+  \item \C++{numeros} Lista sobre la que se realizarán todas las
+   operaciones necesarias hasta llegar a una aproximación (o al número
+   buscado exactamente) de \C++{meta}
+  \item \C++{operaciones} Lista de objetos \C++{Cuenta} en los que
+   se almacenarán las operaciones realizadas hasta llegar a \C++{meta},
+   o a una aproximación a \C++{meta}
   \item \C++{meta} Entero positivo de 3 cifras a aproximar, y en
    caso de ser posible, hallar de forma exacta mediante operaciones sobre
+   las cifras dadas iniciales
   \item \C++{operacionesPosibles} Conjunto que contiene todas las
-   operaciones posibles aplicables}       
+   operaciones posibles aplicables \{\C++{+,*,-,/}\}
+  \item \C++{opera()} Función que devuelve para dos operandos dados, el resultado
+   de una operación determinada de entre \C++{operacionesPosibles} para ellos
+  \item \C++{resuelve()} Función recursiva que selecciona parejas de cifras
+   de \C++{numeros}, que introduce operados (con \C++{opera()}) en dicha lista, 
+   para llamarse a sí misma e intentar llegar a \C++{meta}. Caso de no producir
+   acierto, saca los números introducidos y devuelve los extraídos, y reitera con 
+   otra pareja
+  }
    
+   \newpage
+   % Recreo el algoritmo intentando usar el más alto nivel posible.
+   
+   El algoritmo propuesto para resolver el problema de las cifras es:\\
    
    \begin{algorithm}[H]
    \begin{algorithmic}[1]
    \REQUIRE \ \\
 	    \C++{meta}, número a aproximar\\
 	    \C++{numeros}, enteros aleatorios iniciales del conjunto\\
-            \C++{size}, número de posiciones de la lista \C++{numeros}    
-            
-   \ENSURE \TRUE si logramos alcanzar exactamente \C++{meta}
-   
-   \IF{\C++{size} es menor a 2}
-   \RETURN \FALSE
-   \ENDIF
-   
-   \FOR{\C++{i} desde la primera posición de la lista, hasta la anterior a la 
-        última (\C++{size})}
-    \STATE {Tomamos \C++{a} como el número ocupando la posición $i$-ésima 
-    de la lista}
-   \IF{$a\neq 0$}
-    \STATE{sobreescribimos la posición que ocupaba \C++{a}
-   con lo que haya en la última posición de la lista}
-   \ELSE
-    \STATE{Avanzamos a la iteración siguiente}
-   \ENDIF
-   \FOR{\C++{j} desde \C++{i} hasta \C++{size-1}}
-    \STATE {Tomamos \C++{b} como el número que ocupa la posición $j$-ésima
-    de la lista}
-    \IF{$b\neq 0$}
-      \STATE{sobreescribimos la posición que ocupaba \C++{b}
-    con lo que haya en la penúltima posición de la lista}
-    \ELSE
-      \STATE{Avanzamos a la iteración siguiente}
-    \ENDIF
-    
-    \FOR{operación \C++{OP} en ${/,-,+,*}$}
-    \STATE{Tomamos \C++{c} como el mayor de \C++{a} y \C++{b},
-    y \C++{d} como el menor de ambos}
-    \ENDFOR
-    
-   \ENDFOR
-    
-   \ENDFOR
-   \end{algorithmic}
-   \caption{ALGORITMO DE CÁLCULO DEL NÚMERO DE 3 CIFRAS}
-   \end{algorithm}
-   
-   \newpage
-   % Recreo el algoritmo intentando usar el más alto nivel posible.
-   
-   \begin{algorithm}[H]
-   \begin{algorithmic}[1]
-   \REQUIRE \ \\
-	    \C++{meta}, número a aproximar\\
-	    \C++{números}, enteros aleatorios iniciales del conjunto\\
             \C++{size}, número de posiciones de la lista \C++{números}    
             
    \ENSURE \ \\
-	   \TRUE si logramos alcanzar exactamente \C++{meta} \\
+	   \TRUE {si logramos alcanzar exactamente \C++{meta} o es una
+			 de las cifras de \C++{numeros}}\\
 	   \FALSE {si sólo logramos una aproximación \C++{aprox} a \C++{meta}}
    
-   % Falta comentar el caso base de la inducción
-   \STATE { Inicializa \C++{mejor\_aprox} a -1. } 
-   \FOR{cada pareja ordenada \C++{(a,b)} en \C++{números}}
-   \STATE{ 
-      \FOR{cada operación \C++{op} en \C++{[+,*,-,/]}} 
-	  \IF { \C++{a (op) b} es posible }
-	    \STATE { Computa la \C++{cuenta} }
-	    \STATE { Almacena la cuenta en la pila de cuentas }
-	    \STATE { Retira \C++{a,b} del conjunto de números }
-	    \STATE { Introduce \C++{a (op) b} en el conjunto de números }
-	    \IF { $\C++{meta - a (op) b} \leq \C++{meta - mejor\_aprox}$  }
-	      \STATE {$\C++{mejor\_aprox := meta}$}
-	      \IF {$\C++{mejor\_aprox == meta}$}
-		\RETURN \TRUE
-	      \ENDIF
-	    \ENDIF
-	    \IF { llamamos recursivamente al algoritmo sobre \C++{números} y devuelve \TRUE }
-	      \RETURN \TRUE
-	    \ENDIF
-	    \STATE { Retira la \C++{cuenta} de la pila de cuentas }
-	    \STATE { Retira \C++{a (op) b} del conjunto de números }
-	    \STATE { Reintroduce \C++{a,b} en el conjunto de números }
-	  \ENDIF
-      \ENDFOR
-    }
-   \ENDFOR
+	\STATE { Inicializa \C++{mejor\_aprox} a -1. } 
+	\IF{ Hay al menos dos cifras que seleccionar}
+		\STATE{
+		\FOR{cada pareja ordenada \C++{(a,b)} en \C++{numeros}}
+			\STATE{ 
+			\FOR{cada operación \C++{op} en \C++{[+,*,-,/]}} 
+			\IF { \C++{a (op) b} es posible }
+				\STATE { Computa la \C++{cuenta} }
+				\STATE { Almacena la cuenta en la pila de cuentas }
+				\STATE { Retira \C++{a,b} del conjunto de números }
+				\STATE { Introduce \C++{a (op) b} en el conjunto de números }
+				\IF { $\C++{0}\leq\C++{meta - a (op) b} \leq \C++{meta - mejor\_aprox}$  }
+				\STATE {$\C++{mejor\_aprox := meta}$}
+				\IF {$\C++{mejor\_aprox == meta}$}
+				\RETURN \TRUE
+				\ENDIF
+				\ENDIF
+				\IF { llamamos recursivamente al algoritmo sobre \C++{números} y devuelve \TRUE }
+				\RETURN \TRUE
+				\ENDIF
+				\STATE { Retira la \C++{cuenta} de la pila de cuentas }
+				\STATE { Retira \C++{a (op) b} del conjunto de números }
+				\STATE { Reintroduce \C++{a,b} en el conjunto de números }
+			\ENDIF
+			\ENDFOR
+			}
+		\ENDFOR
+		}
+    \ELSE
+		\STATE{Devolver \FALSE}
+	\ENDIF
    \end{algorithmic}
    \caption{ALGORITMO DE CÁLCULO DEL NÚMERO DE 3 CIFRAS}
+   \label{Cifras}
    \end{algorithm}
-   % Falta comentar cómo después se usaría la cola de operaciones para imprimir
+   
+   % Normalización e impresión de operaciones
+   \newpage
+   Puesto que en la lista de operaciones aparecen todas las operaciones necesarias
+   para llegar a \C++{meta} o a una aproximación a la misma, pero también pueden
+   más operaciones que las estrictamente necesarias, se presenta a continuación,
+   otro algoritmo para normalizar dichas operaciones en función del resultado obtenido
+   por el algoritmo \ref{Cifras} \\
+   
+   \begin{algorithm}[H]
+   \begin{algorithmic}[1]
+   
+   	\IF{hay más de una \C++{Cuenta} en la lista de operaciones}
+		\STATE{Llama al siguiente algoritmo, pasándole \C++{primero}
+		y \C++{segundo} de la última \C++{Cuenta} efectuada, y como
+		posición de escritura la penúltima de \C++{operaciones} (podría ser \C++{-1})}
+	\ENDIF
+	\REQUIRE \ \\
+	    \C++{unaCuenta}, última cuenta necesaria en la lista\\
+	    \C++{pos\_escribir}, posición anterior a la última normalizada\\
+	
+	\STATE{La \C++{Cuenta} a consultar es la que ocupa \C++{pos\_escribir}}
+   % Falta comentar el caso base de la inducción
+	\WHILE {No se hallen \C++{primero} y \C++{segundo} de \C++{unaCuenta}
+   como resultado de otra \C++{Cuenta}, y quede alguna por consultar}
+		\STATE{
+			\IF {el resultado de la \C++{Cuenta} consultada es \C++{primero} o \C++{segundo}}
+				\STATE{Marcarlo como encontrado}
+				\STATE{Intercambiar la \C++{Cuenta} que ocupa la posición \C++{pos\_escribir} en 
+				\C++{operaciones} por la \C++{Cuenta} consultada}
+				\STATE{Decrementa \C++{pos\_escribir} y llama al algoritmo para la última
+				\C++{Cuenta} consultada, y \C++{pos\_escribir} }
+				\STATE{El índice a consultar es ahora \C++{pos\_escribir}}
+			\ELSE
+				\STATE{Decrementa el índice de la posición a consultar}
+			\ENDIF
+		}
+	\ENDWHILE
+   \end{algorithmic}
+   \ \\
+   Una vez normalizadas las operaciones:
+   \begin{algorithmic}[1]
+    \STATE{Se itera \C++{operaciones} desde el principio
+    hasta el final de la lista}
+    \PRINT{\C++{Cuenta} actual}
+   \end{algorithmic}
+
+   \caption{ALGORITMO DE NORMALIZACIÓN DE OPERACIONES}
+   \label{Numeros}
+   \end{algorithm}
    % Falta comentar cómo las operaciones para la mejor operación se copian a cada paso
 \end{document}
