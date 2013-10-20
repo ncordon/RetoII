@@ -134,7 +134,6 @@ bool Cifras::resuelve_rec (int meta, int size) {
 		    return true;
         
 		// Saco resultado
-		numeros.pop_back();
                 #ifndef GRUPOS
 		//Saca las operaciones
 		operaciones.pop_back();
