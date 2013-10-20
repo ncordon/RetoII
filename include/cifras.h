@@ -53,13 +53,12 @@ private:
     /**
      * @brief Permite buscar el origen de dos operandos dados
      * 
-     * Función recursiva para dos números de las operaciones realizadas de 
-     * qué otras operaciones derivan los mismos, hasta que llega a la raíz de
-     * las mismas, y las apila a partir de pos_escribir 
+     * Función recursiva que busca para una Cuenta dada de qué otras operaciones 
+     * derivan sus operandos, hasta que llega a la raíz de los mismos, 
+     * y las apila a partir de pos_escribir 
      * 
      */
-    void buscaOperandos(int un_operando, int otro_operando, 
-			int& pos_escribir);
+    void buscaOperandos(Cuenta unaCuenta, int& pos_escribir);
   
 #endif
   

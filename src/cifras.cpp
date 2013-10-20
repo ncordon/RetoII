@@ -194,18 +194,19 @@ void Cifras::normalizaOperaciones() {
     int pos_escribir = size - 2;
     
     if (pos_escribir >= 0){
-	buscaOperandos (mejor_operaciones[size-1].primero,
-			mejor_operaciones[size-1].segundo,pos_escribir);
+	buscaOperandos (mejor_operaciones[size-1],pos_escribir);
   
 	mejor_operaciones.erase(mejor_operaciones.begin(),
 				mejor_operaciones.begin() + pos_escribir + 1);   
     }
 }
 
-void Cifras::buscaOperandos(int un_operando, int otro_operando, int& pos_escribir){
+void Cifras::buscaOperandos(Cuenta unaCuenta, int& pos_escribir){
     bool uno_encontrado=false, otro_encontrado=false;
     int j = pos_escribir;
-  
+    int un_operando = unaCuenta.primero,
+        otro_operando = unaCuenta.segundo;
+        
     while ((!uno_encontrado || !otro_encontrado) && j>=0){
 	if ((mejor_operaciones[j].resultado == un_operando) || 
 	    (mejor_operaciones[j].resultado == otro_operando)){
@@ -220,8 +221,7 @@ void Cifras::buscaOperandos(int un_operando, int otro_operando, int& pos_escribi
 	    mejor_operaciones[pos_escribir]=aux;
 	    pos_escribir--;
       
-	    buscaOperandos(mejor_operaciones[pos_escribir+1].primero,
-			   mejor_operaciones[pos_escribir+1].segundo, pos_escribir);
+	    buscaOperandos(mejor_operaciones[pos_escribir+1], pos_escribir);
 	    j = pos_escribir;
 	}
 	else
