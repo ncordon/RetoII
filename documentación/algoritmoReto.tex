@@ -3,6 +3,7 @@
 \usepackage{verbatim}
 \usepackage{algorithm}
 \usepackage{algorithmic}
+\everymath{\displaystyle}
 \input{spanishAlgorithmic.tex}  % Variables de entorno en español
 \setlength{\parindent}{0cm}
 
@@ -140,6 +141,55 @@ Los TDA empleados en la resolución del problema de las cifras han sido:\\
    \label{Cifras}
    \end{algorithm}
    
+   Llamando $T(n)$ a la función que da la eficiencia del algoritmo \ref{Cifras},
+   en función de la longitud del vector \C++{numeros}, esto es, de las cifras
+   dadas para llegar a meta, se tiene:
+   \begin{itemize} 
+    \item [-] Desde las líneas 1 a 3, las operaciones realizadas son $\mathcal{O}(1)$
+    \item [-] La selección de parejas \C++{(a,b)} de la línea 4 se hace mediante
+    combinaciones ${a\choose b}$. Explícitamente, podemos observar como en
+    la implementación en \C++{C++} adjunta, esto supone:
+    
+    $$\begin{array}{llr}
+    \sum_{i=0}^{n-1}(n-i)=&\sum_{i=0}^{n-1}n-\sum_{i=0}^{n-1}i=&
+    \frac{2\cdot n(n-1)}{2}-\frac{(n-1)\cdot(n-1)}{2}=\\
+    =\frac{n^2-1}{2} & operaciones &
+    \end{array}$$
+    
+    \item [-] La línea 8 es $\mathcal{O}(1)$
+    \item [-] Las líneas 9 y 10 dependiendo del lenguaje de programación y de
+    la estructura elegida para almacenar las operaciones y el conjunto, podrían
+    ser $\mathcal{O}(1)$ en caso de ser listas, y $\mathcal{O}(n)$ cada una en
+    caso de tratarse de vectores como en \C++{C++}. En la implementación
+    aportada se emplea un \C++{vector} de la \C++{STL} de tamaño fijo,
+    luego la línea 10 se computaría como $\mathcal{O}(1)$. Por simplicidad
+    también consideraremos la línea 9 como $\mathcal{O}(1)$, dado que podría
+    programarse una lista enlazada dotada del operador \C++{[]} necesario
+    para implementar el algoritmo \ref{Numeros} en \C++{C++}.
+    
+    \item [-] Desde las líneas 12 a 17, se trata de operaciones $\mathcal{O}(1)$
+    \item [-] De nuevo sobre las líneas 21, 22, 23 puede decirse lo mismo que sobre
+    las 9,10. Aquí las consideraremos $\mathcal{O}(1)$
+    \item [-] En la línea 18 se llama recursivamente al algoritmo. Por tanto:
+    
+    $$T(n)=\left\{\begin{array}{lr}
+                   \frac{n^2-1}{2}\cdot T(n-1) & n>2\\
+                   \ \\
+                   1 & n=1
+                  \end{array}\right.$$
+                  
+    y se tiene que:
+    
+    \begin{eqnarray} \label{efic}
+    T(n)=\frac{n^2-1}{2}\cdot T(n-1)= \frac{n^2-1}{2}\cdot\frac{(n-1)^2-1}{2}
+    \cdot T(n-2)=\\ \nonumber
+    =\ldots=T(n-j-1)\cdot\frac{1}{2^{j+1}}\prod_{i=0}^j[(n-i)^2-1]
+    \end{eqnarray}
+    
+    Tomando $j=n-3$ en (\ref{efic}), se tiene $T(n)=
+    \mathcal{O}\left(\frac{(n!)^2}{2^n}\right)$
+   \end{itemize}
+
    % Normalización e impresión de operaciones
    \newpage
    Puesto que en la lista de operaciones aparecen todas las operaciones necesarias
