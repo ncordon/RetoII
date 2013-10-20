@@ -116,7 +116,7 @@ Los TDA empleados en la resolución del problema de las cifras han sido:\\
 				\STATE { Almacena la cuenta en la pila de cuentas }
 				\STATE { Retira \C++{a,b} del conjunto de números }
 				\STATE { Introduce \C++{a (op) b} en el conjunto de números }
-				\IF { $\C++{0}\leq\C++{meta - a (op) b} \leq \C++{meta - mejor\_aprox}$  }
+				\IF { $|\C++{meta - a (op) b}| < |\C++{meta - mejor\_aprox}|$  }
 				\STATE {$\C++{mejor\_aprox := meta}$}
 				\IF {$\C++{mejor\_aprox == meta}$}
 				\RETURN \TRUE

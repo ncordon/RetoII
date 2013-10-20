@@ -113,7 +113,7 @@ bool Cifras::resuelve_rec (int meta, int size) {
 		operaciones.push_back(opActual);
             
 		// Intenta resolver o mejorar con el nuevo número, sin pasarse
-		if ((meta-resultado) < (meta-mejor) && (meta-resultado) >= 0) {
+		if (abs(meta-resultado) < abs(meta-mejor)) {
 		    mejor = resultado;
 		    mejor_operaciones = operaciones;
           
