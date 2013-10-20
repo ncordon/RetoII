@@ -143,7 +143,6 @@ bool Cifras::resuelve_rec (int meta, int size) {
 	    numeros[size-2]=numeros[j];
 	    numeros[j]=b;
 	}
-	numeros[size-1]=numeros[i];
 	numeros[i]=a;
     }
     return false;
