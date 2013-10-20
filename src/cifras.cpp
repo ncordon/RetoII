@@ -35,9 +35,9 @@ bool Cifras::resuelve (int meta) {
     for (vector<int>::iterator it = numeros.begin(); it != numeros.end(); ++it) {
         #ifndef GRUPOS
 	if (*it == meta) {
-	    /*vector <string> encontrado;
-	    encontrado.push_back(aString(meta));
-	    mejor_operaciones.push_back();*/
+	    Cuenta encontrada = {meta, meta, ' '};
+	    mejor_operaciones.push_back(encontrada);
+	    
 	    return true;
 	}
         #endif
@@ -148,7 +148,6 @@ bool Cifras::resuelve_rec (int meta, int size) {
 
 #ifndef GRUPOS
 void Cifras::escribeOperaciones() {    
-    //vector<vector<string>>::iterator it;
     vector<Cuenta>::iterator it;
   
     for(it=mejor_operaciones.begin(); it!=mejor_operaciones.end(); it++){
@@ -231,7 +230,11 @@ void Cifras::buscaOperandos(int un_operando, int otro_operando, int& pos_escribi
 
 
 std::ostream& operator<<(std::ostream& salida, const Cifras::Cuenta& operacion) {
-    salida << operacion.primero << operacion.operador << operacion.segundo << '=' << operacion.resultado;
+    if (operacion.operador != ' ')
+        salida << operacion.primero << operacion.operador << operacion.segundo << '=' << operacion.resultado;
+    else 
+        salida << operacion.primero;
+    
     return salida;
 }
 #endif
