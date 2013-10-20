@@ -4,9 +4,9 @@
 using namespace std;
 
 /**
- * @brief Lee los nÃºmeros que serÃ¡n usados.
- * @param n NÃºmero de nÃºmeros a leer.
- * @return Vector de nÃºmeros leidos.
+ * @brief Lee los números que serán usados.
+ * @param n Número de números a leer.
+ * @return Vector de números leidos.
  */
 vector<int> leerNumeros () {
     vector<int> numeros;
@@ -18,14 +18,14 @@ vector<int> leerNumeros () {
 }
 
 int main() {
-    // Lee nÃºmeros
+    // Lee números
     #ifndef GRUPOS
     int meta;
     cout << "Introduce meta a resolver: ";
     cin >> meta;
     #endif
 
-    cout << "Introduce nÃºmeros: ";
+    cout << "Introduce números: ";
     vector<int> leidos (leerNumeros());
     
     // Resuelve el problema
@@ -34,9 +34,9 @@ int main() {
 
     #ifndef GRUPOS
     if (cifras.resuelve(meta))
-        cout << "SoluciÃ³n" << endl;
+        cout << "Solución" << endl;
     else
-        cout << "AproximaciÃ³n" << endl;
+        cout << "Aproximación" << endl;
     
     cifras.escribeOperaciones();
     #endif

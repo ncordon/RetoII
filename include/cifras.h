@@ -11,14 +11,14 @@ class Cifras {
 private:
     
     /**
-     * Cola/Pila con los nÃºmeros que deben ser probados.
+     * Cola/Pila con los números que deben ser probados.
      */
     std::vector<int> numeros;
   
 #ifndef GRUPOS
     /**
-     * TDA Cuenta. Representa una operaciÃ³n binaria, concretamente
-     * una suma, resta, multiplicaciÃ³n o divisiÃ³n. Permite ademÃ¡s
+     * TDA Cuenta. Representa una operación binaria, concretamente
+     * una suma, resta, multiplicación o división. Permite además
      * almacenar el resultado.
      */
     struct Cuenta {
@@ -35,7 +35,7 @@ private:
     std::vector<Cuenta> operaciones;
   
     /**
-     * Almacena la mejor aproximaciÃ³n hasta el momento y las operaciones
+     * Almacena la mejor aproximación hasta el momento y las operaciones
      * que requiere llegar a ese resultado.
      */
     int mejor;
@@ -44,7 +44,7 @@ private:
     /**
      * @brief Normalizador de operaciones realizadas
      * 
-     * Permite dejar en operaciones sÃ³lo aquellas que han sido estrictamente
+     * Permite dejar en operaciones sólo aquellas que han sido estrictamente
      * necesarias para llegar a meta
      * 
      */
@@ -53,8 +53,8 @@ private:
     /**
      * @brief Permite buscar el origen de dos operandos dados
      * 
-     * FunciÃ³n recursiva que busca para una Cuenta dada de quÃ© otras operaciones 
-     * derivan sus operandos, hasta que llega a la raÃ­z de los mismos, 
+     * Función recursiva que busca para una Cuenta dada de qué otras operaciones 
+     * derivan sus operandos, hasta que llega a la raíz de los mismos, 
      * y las apila a partir de pos_escribir 
      * 
      */
@@ -63,8 +63,8 @@ private:
 #endif
   
     /**
-     * CÃ³digos de las operaciones permitidas y nÃºmero de operaciones.
-     * NÃ³tese el orden de prioridad de las operaciones que reducen para optimizar
+     * Códigos de las operaciones permitidas y número de operaciones.
+     * Nótese el orden de prioridad de las operaciones que reducen para optimizar
      */
     static const int SUM = 2;
     static const int RES = 0;
@@ -73,31 +73,31 @@ private:
     static const int NOP = 4;
   
     /**
-     * @brief Resuelve recursivamente para un nÃºmero dado.
-     * @return Verdadero si hay soluciÃ³n.
+     * @brief Resuelve recursivamente para un número dado.
+     * @return Verdadero si hay solución.
      */
     bool resuelve_rec (int meta, int size);
   
 #ifdef GRUPOS
     /**
-     * NÃºmero hasta el que se busca.
+     * Número hasta el que se busca.
      */
     static const int BUSCADOS = 1000;
   
     /**
-     * @brief Vector que contiene los nÃºmeros de 3 cifras.
-     * Verdadero si el nÃºmero ya ha sido encontrado.
+     * @brief Vector que contiene los números de 3 cifras.
+     * Verdadero si el número ya ha sido encontrado.
      */
     std::vector<bool> encontrado;
   
     /**
-     * @brief Cantidad de nÃºmeros encontrados actualmente
+     * @brief Cantidad de números encontrados actualmente
      */
     int total_encontrados;
   
     /**
-     * Marca como encontrado el nÃºmero n.
-     * @param NÃºmero a marcar como encontrado.
+     * Marca como encontrado el número n.
+     * @param Número a marcar como encontrado.
      * @return Verdadero si ha encontrado todos.
      */
     bool marcar (int n);
@@ -111,42 +111,42 @@ public:
     void imprime_restantes ();
   
     /**
-     * Comprueba que estÃ©n todos marcados.
+     * Comprueba que estén todos marcados.
      */
     bool todos_marcados ();
 #endif
   
     /**
-     * @brief Constructor. Selecciona un conjunto de nÃºmeros aleatorio.
-     * Entre los nÃºmeros [1,2,3,4,5,6,7,8,9,10,25,50,75,100], escoge seis.
+     * @brief Constructor. Selecciona un conjunto de números aleatorio.
+     * Entre los números [1,2,3,4,5,6,7,8,9,10,25,50,75,100], escoge seis.
      */
     Cifras ();
   
     /**
-     * @brief Constructor. Dado un vector de nÃºmeros.
+     * @brief Constructor. Dado un vector de números.
      */
     Cifras (std::vector<int> numeros);
   
     /**
-     * @brief Une dos cifras en una usando la operaciÃ³n indicada.
+     * @brief Une dos cifras en una usando la operación indicada.
      * @param a Primera cifra.
      * @param b Segunda cifra.
-     * @param codop CÃ³digo de operaciÃ³n que se realizarÃ¡ entre ellas.
-     * @pre La operaciÃ³n se puede realizar produciendo un entero no negativo.
-     * @pre Es un nÃºmero de operaciÃ³n vÃ¡lido.
+     * @param codop Código de operación que se realizará entre ellas.
+     * @pre La operación se puede realizar produciendo un entero no negativo.
+     * @pre Es un número de operación válido.
      */
     int calcula (int a, int b, int codop);
   
     /**
-     * @brief Muestra las operaciones para llegar a la soluciÃ³n.
+     * @brief Muestra las operaciones para llegar a la solución.
      * Las operaciones se encontraban en la pila de operaciones.
      */
     void escribeOperaciones ();
   
     /**
-     * @brief Resuelve para un nÃºmero dado.
-     * @param meta NÃºmero buscado.
-     * @return Verdadero si hay soluciÃ³n.
+     * @brief Resuelve para un número dado.
+     * @param meta Número buscado.
+     * @return Verdadero si hay solución.
      */
     bool resuelve (int meta = 0);
     
