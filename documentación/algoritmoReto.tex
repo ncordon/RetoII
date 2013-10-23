@@ -255,6 +255,21 @@ Los TDA empleados en la resolución del problema de las cifras han sido:\\
    \end{algorithm}
    % Falta comentar cómo las operaciones para la mejor operación se copian a cada paso
    
+   \newpage
+   \subsection{Optimización}
+   El algoritmo mostrado puede ser optimizado haciendo que no estudie los casos en los que la pareja ordenada \C++{(a,b)} no cumpla unos
+   determinados requisitos, y no compute el resultado en los casos en los que éste no aportara nada a la resolución del algoritmo. Las
+   siguientes comprobaciones están diseñadas para aplicarse antes de la línea 8 del algoritmo principal, donde se calcula la operación. 
+   En caso de que se cumpla una de estas condiciones, puede pasarse a la siguiente iteración del bucle.\\
+   \begin{itemize}
+    \item [-] El resultado \C++{a (op) b} es igual a \C++{a} o \C++{b}, por lo que no aporta nada a la resolución.
+    \item [-] El resultado es igual a 0, \C++{a (op) b == 0}, pero las operaciones con \C++{0} no aportan nada a la resolución.
+    \item [-] El resultado es negativo, como consecuencia del desbordamiento o de restas no válidas, no debe ser usado.
+    %\item [-] Uno de los números es igual a \C++{0}, no aporta nada a la resolución.
+    \item [-] Como optimización previa, los números están ordenados. Se previene la duplicación de parejas y de casos.
+    \item [-] Como optimización previa, se descartan divisiones no enteras o restas negativas, que no pueden usarse en la resolución.
+   \end{itemize}
+
    
    
    \newpage
