@@ -35,6 +35,9 @@
 \begin{document}
 \maketitle
 
+
+\section{Tipos de datos abstractos usados.}
+
 Se emplea la siguiente notación genérica para la representación 
 de un TDA abstracto:\\
 
@@ -90,10 +93,13 @@ Los TDA empleados en la resolución del problema de las cifras han sido:\\
    acierto, saca los números introducidos y devuelve los extraídos, y reitera con 
    otra pareja
   }
+   % ¿Faltaría el TDA Números?
    
    \newpage
    % Recreo el algoritmo intentando usar el más alto nivel posible.
    
+\section{Algoritmos.}
+\subsection{Algoritmo principal.}
    El algoritmo propuesto para resolver el problema de las cifras es:\\
    
    \begin{algorithm}[H]
@@ -150,7 +156,7 @@ Los TDA empleados en la resolución del problema de las cifras han sido:\\
    \begin{itemize} 
     \item [-] Desde las líneas 1 a 3, las operaciones realizadas son $\mathcal{O}(1)$
     \item [-] La selección de parejas \C++{(a,b)} de la línea 4 se hace mediante
-    combinaciones ${a\choose b}$. Explícitamente, podemos observar como en
+    combinaciones ${a \choose b}$. Explícitamente, podemos observar como en
     la implementación en \C++{C++} adjunta, esto supone:
     
     \begin{gather*}
@@ -197,11 +203,14 @@ Los TDA empleados en la resolución del problema de las cifras han sido:\\
 
    % Normalización e impresión de operaciones
    \newpage
+   
+\subsection{Algoritmo de normalización de operaciones}
    Puesto que en la lista de operaciones aparecen todas las operaciones necesarias
    para llegar a \C++{meta} o a una aproximación a la misma, pero también pueden
    más operaciones que las estrictamente necesarias, se presenta a continuación,
    otro algoritmo para normalizar dichas operaciones en función del resultado obtenido
-   por el algoritmo \ref{Cifras} \\
+   por el algoritmo \ref{Cifras}. Nótese que este algoritmo está destinado a mejorar una
+   solución válida ya obtenida para hacer que se muestre con las mínimas operaciones posibles.\\
    
    \begin{algorithm}[H]
    \begin{algorithmic}[1]
@@ -248,7 +257,13 @@ Los TDA empleados en la resolución del problema de las cifras han sido:\\
    
    
    
+   \newpage
+   \section{Implementación}
+   Mostramos ahora cómo podría implementarse el algoritmo propuesto, aplicando sobre él las optimizaciones sugeridas.
+   Con esta implementación hemos querido comprobar el correcto funcionamiento y eficiencia del algoritmo. Para la mayoría
+   de los casos, el tiempo requerido no excede los pocos segundos, estando el máximo en torno a los 20 segundos. \\
    
+   % Habría que mostrar todo el código y dividirlo en los distintos ficheros.
    % Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
    \small
    \texttt{% Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
