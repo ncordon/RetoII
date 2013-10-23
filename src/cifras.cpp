@@ -76,7 +76,7 @@ bool Cifras::resuelve_rec (int meta, int size) {
     for (int i=0; i<size-1; ++i) {
 	int a = numeros[i];
     
-	if (!(a==0))
+	if (a != 0)
 	    numeros[i]=numeros[size-1];
 	else
 	    continue;
