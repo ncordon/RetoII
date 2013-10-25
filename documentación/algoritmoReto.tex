@@ -303,6 +303,42 @@ Los TDA empleados en la resolución del problema de las cifras han sido:\\
    en buscar una solución siguiendo un sólo camino cada vez, y ahondando en la recursividad antes de volver a buscar por otro camino.
    Este algoritmo buscar avanzar de forma uniforme por todos los caminos posibles hacia la solución.
    
+   Usamos varios grupos de \C++{numeros} y una cola de ellos, llamada \C++{colaGrupos}
+   \begin{algorithm}[H]
+   \begin{algorithmic}[1]
+   
+	\STATE{Insertamos el grupo de números iniciales en \C++{colaGrupos}}
+	\WHILE{\C++{colaGrupos.noVacía()}}
+	    \STATE{saca un grupo de la cola, \C++{numeros}}
+	    \FOR{cada pareja ordenada \C++{(a,b)} en \C++{numeros}}
+	    \FOR{cada operación \C++{op} en \C++{[+,*,-,/]}}
+		\IF { \C++{a (op) b} es posible }
+				\STATE { Computa \C++{a (op) b}}
+				\IF { $|\C++{meta - a (op) b}| < |\C++{meta - mejor\_aprox}|$  }
+				\STATE {$\C++{mejor\_aprox := meta}$}
+				\IF {$\C++{mejor\_aprox == meta}$}
+				\RETURN \TRUE
+				\ENDIF
+				\ENDIF
+				
+				\STATE { Crea un nuevo grupo por copia \C++{nuevos(numeros)}}
+				\STATE { Retira \C++{a,b} de \C++{nuevos} }
+				\STATE { Introduce \C++{a (op) b} en \C++ {nuevos} }
+				\STATE { Introduce \C++{nuevos} en \C++{colaGrupos}}
+				
+		\ENDIF
+	    \ENDFOR
+	    \ENDFOR
+	\ENDWHILE
+   
+   \end{algorithmic}
+   \caption{ALGORITMO ALTERNATIVO}
+   \label{Alternativo}
+   \end{algorithm}
+   
+   Las optimizaciones serían paralelas a las del algoritmo principal. Se indica además, la posibilidad de mantener
+   una cola con prioridad, facilitando el paso según tamaño del grupo o magnitud de sus números; y que además, elimine
+   grupos repetidos aprovechando las comparaciones necesarias para mantener el orden.
    
    \newpage
    \section{Implementación}
