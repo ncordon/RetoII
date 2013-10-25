@@ -363,7 +363,201 @@ Los TDA empleados en la resolución del problema de las cifras han sido:\\
    
    % Habría que mostrar todo el código y dividirlo en los distintos ficheros.
    
-   % Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+   \subsection{Archivo cifras.h}
+   \small
+   \texttt{% Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+   \noindent
+   \mbox{}\texttt{\textcolor{Black}{001:}} \textbf{\textcolor{RoyalBlue}{\#ifndef}}\ CLASS \\
+   \mbox{}\texttt{\textcolor{Black}{002:}} \textbf{\textcolor{RoyalBlue}{\#define}}\ CLASS \\
+   \mbox{}\texttt{\textcolor{Black}{003:}}  \\
+   \mbox{}\texttt{\textcolor{Black}{004:}} \textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}string\textgreater{}}} \\
+   \mbox{}\texttt{\textcolor{Black}{005:}} \textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}vector\textgreater{}}} \\
+   \mbox{}\texttt{\textcolor{Black}{006:}} \textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}sstream\textgreater{}}} \\
+   \mbox{}\texttt{\textcolor{Black}{007:}} \textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}iostream\textgreater{}}} \\
+   \mbox{}\texttt{\textcolor{Black}{008:}} \textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}stdlib.h\textgreater{}}} \\
+   \mbox{}\texttt{\textcolor{Black}{009:}}  \\
+   \mbox{}\texttt{\textcolor{Black}{010:}} \textbf{\textcolor{Blue}{class}}\ \textcolor{TealBlue}{Cifras}\ \textcolor{Red}{\{} \\
+   \mbox{}\texttt{\textcolor{Black}{011:}} \textbf{\textcolor{Blue}{private}}\textcolor{BrickRed}{:} \\
+   \mbox{}\texttt{\textcolor{Black}{012:}} \ \ \ \  \\
+   \mbox{}\texttt{\textcolor{Black}{013:}} \ \ \ \ \textit{\textcolor{Brown}{/**}} \\
+   \mbox{}\texttt{\textcolor{Black}{014:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ Vector\ dinámico\ con\ los\ números\ que\ deben\ ser\ probados.}} \\
+   \mbox{}\texttt{\textcolor{Black}{015:}} \textit{\textcolor{Brown}{\ \ \ \ \ */}} \\
+   \mbox{}\texttt{\textcolor{Black}{016:}} \ \ \ \ std\textcolor{BrickRed}{::}\textcolor{TealBlue}{vector\textless{}int\textgreater{}}\ numeros\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{017:}} \ \  \\
+   \mbox{}\texttt{\textcolor{Black}{018:}} \textbf{\textcolor{RoyalBlue}{\#ifndef}}\ GRUPOS \\
+   \mbox{}\texttt{\textcolor{Black}{019:}} \ \ \ \ \textit{\textcolor{Brown}{/**}} \\
+   \mbox{}\texttt{\textcolor{Black}{020:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ TDA\ Cuenta.\ Representa\ una\ operación\ binaria,\ concretamente}} \\
+   \mbox{}\texttt{\textcolor{Black}{021:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ una\ suma,\ resta,\ multiplicación\ o\ división.\ Permite\ además}} \\
+   \mbox{}\texttt{\textcolor{Black}{022:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ almacenar\ el\ resultado.}} \\
+   \mbox{}\texttt{\textcolor{Black}{023:}} \textit{\textcolor{Brown}{\ \ \ \ \ */}} \\
+   \mbox{}\texttt{\textcolor{Black}{024:}} \ \ \ \ \textbf{\textcolor{Blue}{struct}}\ \textcolor{TealBlue}{Cuenta}\ \textcolor{Red}{\{} \\
+   \mbox{}\texttt{\textcolor{Black}{025:}} \ \ \ \ \ \ \ \ \textcolor{ForestGreen}{int}\ primero\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{026:}} \ \ \ \ \ \ \ \ \textcolor{ForestGreen}{int}\ segundo\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{027:}} \ \ \ \ \ \ \ \ \textcolor{ForestGreen}{char}\ operador\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{028:}} \ \ \ \ \ \ \ \ \textcolor{ForestGreen}{int}\ resultado\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{029:}} \ \ \ \ \textcolor{Red}{\}}\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{030:}} \ \ \ \  \\
+   \mbox{}\texttt{\textcolor{Black}{031:}} \ \ \ \ \textit{\textcolor{Brown}{/**}} \\
+   \mbox{}\texttt{\textcolor{Black}{032:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ Vector\ en\ el\ que\ se\ guardan\ las\ operaciones\ que\ se\ han\ realizado,}} \\
+   \mbox{}\texttt{\textcolor{Black}{033:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ para\ mostrarlas\ luego\ por\ pantalla.}} \\
+   \mbox{}\texttt{\textcolor{Black}{034:}} \textit{\textcolor{Brown}{\ \ \ \ \ */}} \\
+   \mbox{}\texttt{\textcolor{Black}{035:}} \ \ \ \ std\textcolor{BrickRed}{::}\textcolor{TealBlue}{vector\textless{}Cuenta\textgreater{}}\ operaciones\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{036:}} \ \  \\
+   \mbox{}\texttt{\textcolor{Black}{037:}} \ \ \ \ \textit{\textcolor{Brown}{/**}} \\
+   \mbox{}\texttt{\textcolor{Black}{038:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ Almacena\ la\ mejor\ aproximación\ hasta\ el\ momento\ y\ las\ operaciones}} \\
+   \mbox{}\texttt{\textcolor{Black}{039:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ que\ requiere\ llegar\ a\ ese\ resultado.}} \\
+   \mbox{}\texttt{\textcolor{Black}{040:}} \textit{\textcolor{Brown}{\ \ \ \ \ */}} \\
+   \mbox{}\texttt{\textcolor{Black}{041:}} \ \ \ \ \textcolor{ForestGreen}{int}\ mejor\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{042:}} \ \ \ \ std\textcolor{BrickRed}{::}\textcolor{TealBlue}{vector\textless{}Cuenta\textgreater{}}\ mejor$\_$operaciones\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{043:}} \ \  \\
+   \mbox{}\texttt{\textcolor{Black}{044:}} \ \ \ \ \textit{\textcolor{Brown}{/**}} \\
+   \mbox{}\texttt{\textcolor{Black}{045:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ }}\textcolor{ForestGreen}{@brief}\textit{\textcolor{Brown}{\ Normalizador\ de\ operaciones\ realizadas}} \\
+   \mbox{}\texttt{\textcolor{Black}{046:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ }} \\
+   \mbox{}\texttt{\textcolor{Black}{047:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ Permite\ dejar\ en\ operaciones\ sólo\ aquellas\ que\ han\ sido\ estrictamente}} \\
+   \mbox{}\texttt{\textcolor{Black}{048:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ necesarias\ para\ llegar\ a\ meta}} \\
+   \mbox{}\texttt{\textcolor{Black}{049:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ }} \\
+   \mbox{}\texttt{\textcolor{Black}{050:}} \textit{\textcolor{Brown}{\ \ \ \ \ */}} \\
+   \mbox{}\texttt{\textcolor{Black}{051:}} \ \ \ \ \textcolor{ForestGreen}{void}\ \textbf{\textcolor{Black}{normalizaOperaciones}}\textcolor{BrickRed}{();} \\
+   \mbox{}\texttt{\textcolor{Black}{052:}} \ \  \\
+   \mbox{}\texttt{\textcolor{Black}{053:}} \ \ \ \ \textit{\textcolor{Brown}{/**}} \\
+   \mbox{}\texttt{\textcolor{Black}{054:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ }}\textcolor{ForestGreen}{@brief}\textit{\textcolor{Brown}{\ Permite\ buscar\ el\ origen\ de\ dos\ operandos\ dados}} \\
+   \mbox{}\texttt{\textcolor{Black}{055:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ }} \\
+   \mbox{}\texttt{\textcolor{Black}{056:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ Función\ recursiva\ que\ busca\ para\ una\ Cuenta\ dada\ de\ qué\ otras\ operaciones}} \\
+   \mbox{}\texttt{\textcolor{Black}{057:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ derivan\ sus\ operandos,\ hasta\ que\ llega\ a\ la\ raíz\ de\ los\ mismos,\ }} \\
+   \mbox{}\texttt{\textcolor{Black}{058:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ y\ las\ apila\ a\ partir\ de\ pos$\_$escribir\ }} \\
+   \mbox{}\texttt{\textcolor{Black}{059:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ }} \\
+   \mbox{}\texttt{\textcolor{Black}{060:}} \textit{\textcolor{Brown}{\ \ \ \ \ */}} \\
+   \mbox{}\texttt{\textcolor{Black}{061:}} \ \ \ \ \textcolor{ForestGreen}{void}\ \textbf{\textcolor{Black}{buscaOperandos}}\textcolor{BrickRed}{(}\textcolor{TealBlue}{Cuenta}\ unaCuenta\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{int}\textcolor{BrickRed}{\&}\ pos$\_$escribir\textcolor{BrickRed}{);} \\
+   \mbox{}\texttt{\textcolor{Black}{062:}} \ \  \\
+   \mbox{}\texttt{\textcolor{Black}{063:}} \textbf{\textcolor{RoyalBlue}{\#endif}} \\
+   \mbox{}\texttt{\textcolor{Black}{064:}} \ \  \\
+   \mbox{}\texttt{\textcolor{Black}{065:}} \ \ \ \ \textit{\textcolor{Brown}{/**}} \\
+   \mbox{}\texttt{\textcolor{Black}{066:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ Códigos\ de\ las\ operaciones\ permitidas\ y\ número\ de\ operaciones.}} \\
+   \mbox{}\texttt{\textcolor{Black}{067:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ Nótese\ el\ orden\ de\ prioridad\ de\ las\ operaciones\ que\ reducen\ para\ optimizar}} \\
+   \mbox{}\texttt{\textcolor{Black}{068:}} \textit{\textcolor{Brown}{\ \ \ \ \ */}} \\
+   \mbox{}\texttt{\textcolor{Black}{069:}} \ \ \ \ \textbf{\textcolor{Blue}{static}}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{ForestGreen}{int}\ SUM\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{2}\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{070:}} \ \ \ \ \textbf{\textcolor{Blue}{static}}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{ForestGreen}{int}\ RES\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{071:}} \ \ \ \ \textbf{\textcolor{Blue}{static}}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{ForestGreen}{int}\ MUL\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{3}\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{072:}} \ \ \ \ \textbf{\textcolor{Blue}{static}}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{ForestGreen}{int}\ DIV\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{1}\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{073:}} \ \ \ \ \textbf{\textcolor{Blue}{static}}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{ForestGreen}{int}\ NOP\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{4}\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{074:}} \ \  \\
+   \mbox{}\texttt{\textcolor{Black}{075:}} \ \ \ \ \textit{\textcolor{Brown}{/**}} \\
+   \mbox{}\texttt{\textcolor{Black}{076:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ }}\textcolor{ForestGreen}{@brief}\textit{\textcolor{Brown}{\ Resuelve\ recursivamente\ para\ un\ número\ dado.}} \\
+   \mbox{}\texttt{\textcolor{Black}{077:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ }}\textcolor{ForestGreen}{@return}\textit{\textcolor{Brown}{\ Verdadero\ si\ hay\ solución.}} \\
+   \mbox{}\texttt{\textcolor{Black}{078:}} \textit{\textcolor{Brown}{\ \ \ \ \ */}} \\
+   \mbox{}\texttt{\textcolor{Black}{079:}} \ \ \ \ \textcolor{ForestGreen}{bool}\ \textbf{\textcolor{Black}{resuelve$\_$rec}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ meta\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{int}\ size\textcolor{BrickRed}{);} \\
+   \mbox{}\texttt{\textcolor{Black}{080:}} \ \  \\
+   \mbox{}\texttt{\textcolor{Black}{081:}} \textbf{\textcolor{RoyalBlue}{\#ifdef}}\ GRUPOS \\
+   \mbox{}\texttt{\textcolor{Black}{082:}} \ \ \ \ \textit{\textcolor{Brown}{/**}} \\
+   \mbox{}\texttt{\textcolor{Black}{083:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ Número\ hasta\ el\ que\ se\ busca.}} \\
+   \mbox{}\texttt{\textcolor{Black}{084:}} \textit{\textcolor{Brown}{\ \ \ \ \ */}} \\
+   \mbox{}\texttt{\textcolor{Black}{085:}} \ \ \ \ \textbf{\textcolor{Blue}{static}}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{ForestGreen}{int}\ BUSCADOS\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{1000}\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{086:}} \ \  \\
+   \mbox{}\texttt{\textcolor{Black}{087:}} \ \ \ \ \textit{\textcolor{Brown}{/**}} \\
+   \mbox{}\texttt{\textcolor{Black}{088:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ }}\textcolor{ForestGreen}{@brief}\textit{\textcolor{Brown}{\ Vector\ que\ contiene\ los\ números\ de\ 3\ cifras.}} \\
+   \mbox{}\texttt{\textcolor{Black}{089:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ Verdadero\ si\ el\ número\ ya\ ha\ sido\ encontrado.}} \\
+   \mbox{}\texttt{\textcolor{Black}{090:}} \textit{\textcolor{Brown}{\ \ \ \ \ */}} \\
+   \mbox{}\texttt{\textcolor{Black}{091:}} \ \ \ \ std\textcolor{BrickRed}{::}\textcolor{TealBlue}{vector\textless{}bool\textgreater{}}\ encontrado\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{092:}} \ \  \\
+   \mbox{}\texttt{\textcolor{Black}{093:}} \ \ \ \ \textit{\textcolor{Brown}{/**}} \\
+   \mbox{}\texttt{\textcolor{Black}{094:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ }}\textcolor{ForestGreen}{@brief}\textit{\textcolor{Brown}{\ Cantidad\ de\ números\ encontrados\ actualmente}} \\
+   \mbox{}\texttt{\textcolor{Black}{095:}} \textit{\textcolor{Brown}{\ \ \ \ \ */}} \\
+   \mbox{}\texttt{\textcolor{Black}{096:}} \ \ \ \ \textcolor{ForestGreen}{int}\ total$\_$encontrados\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{097:}} \ \  \\
+   \mbox{}\texttt{\textcolor{Black}{098:}} \ \ \ \ \textit{\textcolor{Brown}{/**}} \\
+   \mbox{}\texttt{\textcolor{Black}{099:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ Marca\ como\ encontrado\ el\ número\ n.}} \\
+   \mbox{}\texttt{\textcolor{Black}{100:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ }}\textcolor{ForestGreen}{@param}\textit{\textcolor{Brown}{\ Número\ a\ marcar\ como\ encontrado.}} \\
+   \mbox{}\texttt{\textcolor{Black}{101:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ }}\textcolor{ForestGreen}{@return}\textit{\textcolor{Brown}{\ Verdadero\ si\ ha\ encontrado\ todos.}} \\
+   \mbox{}\texttt{\textcolor{Black}{102:}} \textit{\textcolor{Brown}{\ \ \ \ \ */}} \\
+   \mbox{}\texttt{\textcolor{Black}{103:}} \ \ \ \ \textcolor{ForestGreen}{bool}\ \textbf{\textcolor{Black}{marcar}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ n\textcolor{BrickRed}{);} \\
+   \mbox{}\texttt{\textcolor{Black}{104:}} \textbf{\textcolor{RoyalBlue}{\#endif}} \\
+   \mbox{}\texttt{\textcolor{Black}{105:}} \ \  \\
+   \mbox{}\texttt{\textcolor{Black}{106:}} \textbf{\textcolor{Blue}{public}}\textcolor{BrickRed}{:} \\
+   \mbox{}\texttt{\textcolor{Black}{107:}} \textbf{\textcolor{RoyalBlue}{\#ifdef}}\ GRUPOS \\
+   \mbox{}\texttt{\textcolor{Black}{108:}} \ \ \ \ \textit{\textcolor{Brown}{/**}} \\
+   \mbox{}\texttt{\textcolor{Black}{109:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ Imprime\ los\ que\ faltan\ por\ marcar.}} \\
+   \mbox{}\texttt{\textcolor{Black}{110:}} \textit{\textcolor{Brown}{\ \ \ \ \ */}} \\
+   \mbox{}\texttt{\textcolor{Black}{111:}} \ \ \ \ \textcolor{ForestGreen}{void}\ \textbf{\textcolor{Black}{imprime$\_$restantes}}\ \textcolor{BrickRed}{();} \\
+   \mbox{}\texttt{\textcolor{Black}{112:}} \ \  \\
+   \mbox{}\texttt{\textcolor{Black}{113:}} \ \ \ \ \textit{\textcolor{Brown}{/**}} \\
+   \mbox{}\texttt{\textcolor{Black}{114:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ Comprueba\ que\ estén\ todos\ marcados.}} \\
+   \mbox{}\texttt{\textcolor{Black}{115:}} \textit{\textcolor{Brown}{\ \ \ \ \ */}} \\
+   \mbox{}\texttt{\textcolor{Black}{116:}} \ \ \ \ \textcolor{ForestGreen}{bool}\ \textbf{\textcolor{Black}{todos$\_$marcados}}\ \textcolor{BrickRed}{();} \\
+   \mbox{}\texttt{\textcolor{Black}{117:}} \textbf{\textcolor{RoyalBlue}{\#endif}} \\
+   \mbox{}\texttt{\textcolor{Black}{118:}} \ \  \\
+   \mbox{}\texttt{\textcolor{Black}{119:}} \ \ \ \ \textit{\textcolor{Brown}{/**}} \\
+   \mbox{}\texttt{\textcolor{Black}{120:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ }}\textcolor{ForestGreen}{@brief}\textit{\textcolor{Brown}{\ Constructor.\ Selecciona\ un\ conjunto\ de\ números\ aleatorio.}} \\
+   \mbox{}\texttt{\textcolor{Black}{121:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ Entre\ los\ números\ [1,2,3,4,5,6,7,8,9,10,25,50,75,100],\ escoge\ seis.}} \\
+   \mbox{}\texttt{\textcolor{Black}{122:}} \textit{\textcolor{Brown}{\ \ \ \ \ */}} \\
+   \mbox{}\texttt{\textcolor{Black}{123:}} \ \ \ \ \textbf{\textcolor{Black}{Cifras}}\ \textcolor{BrickRed}{();} \\
+   \mbox{}\texttt{\textcolor{Black}{124:}} \ \  \\
+   \mbox{}\texttt{\textcolor{Black}{125:}} \ \ \ \ \textit{\textcolor{Brown}{/**}} \\
+   \mbox{}\texttt{\textcolor{Black}{126:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ }}\textcolor{ForestGreen}{@brief}\textit{\textcolor{Brown}{\ Constructor.\ Dado\ un\ vector\ de\ números.}} \\
+   \mbox{}\texttt{\textcolor{Black}{127:}} \textit{\textcolor{Brown}{\ \ \ \ \ */}} \\
+   \mbox{}\texttt{\textcolor{Black}{128:}} \ \ \ \ \textbf{\textcolor{Black}{Cifras}}\ \textcolor{BrickRed}{(}std\textcolor{BrickRed}{::}\textcolor{TealBlue}{vector\textless{}int\textgreater{}}\ numeros\textcolor{BrickRed}{);} \\
+   \mbox{}\texttt{\textcolor{Black}{129:}} \ \  \\
+   \mbox{}\texttt{\textcolor{Black}{130:}} \ \ \ \ \textit{\textcolor{Brown}{/**}} \\
+   \mbox{}\texttt{\textcolor{Black}{131:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ }}\textcolor{ForestGreen}{@brief}\textit{\textcolor{Brown}{\ Une\ dos\ cifras\ en\ una\ usando\ la\ operación\ indicada.}} \\
+   \mbox{}\texttt{\textcolor{Black}{132:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ }}\textcolor{ForestGreen}{@param}\textit{\textcolor{Brown}{\ a\ Primera\ cifra.}} \\
+   \mbox{}\texttt{\textcolor{Black}{133:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ }}\textcolor{ForestGreen}{@param}\textit{\textcolor{Brown}{\ b\ Segunda\ cifra.}} \\
+   \mbox{}\texttt{\textcolor{Black}{134:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ }}\textcolor{ForestGreen}{@param}\textit{\textcolor{Brown}{\ codop\ Código\ de\ operación\ que\ se\ realizará\ entre\ ellas.}} \\
+   \mbox{}\texttt{\textcolor{Black}{135:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ }}\textcolor{ForestGreen}{@pre}\textit{\textcolor{Brown}{\ La\ operación\ se\ puede\ realizar\ produciendo\ un\ entero\ no\ negativo.}} \\
+   \mbox{}\texttt{\textcolor{Black}{136:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ }}\textcolor{ForestGreen}{@pre}\textit{\textcolor{Brown}{\ Es\ un\ número\ de\ operación\ válido.}} \\
+   \mbox{}\texttt{\textcolor{Black}{137:}} \textit{\textcolor{Brown}{\ \ \ \ \ */}} \\
+   \mbox{}\texttt{\textcolor{Black}{138:}} \ \ \ \ \textcolor{ForestGreen}{int}\ \textbf{\textcolor{Black}{calcula}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ a\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{int}\ b\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{int}\ codop\textcolor{BrickRed}{);} \\
+   \mbox{}\texttt{\textcolor{Black}{139:}} \ \  \\
+   \mbox{}\texttt{\textcolor{Black}{140:}} \ \ \ \ \textit{\textcolor{Brown}{/**}} \\
+   \mbox{}\texttt{\textcolor{Black}{141:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ }}\textcolor{ForestGreen}{@brief}\textit{\textcolor{Brown}{\ Muestra\ las\ operaciones\ para\ llegar\ a\ la\ solución.}} \\
+   \mbox{}\texttt{\textcolor{Black}{142:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ Las\ operaciones\ se\ encontraban\ en\ el\ vector\ de\ operaciones.}} \\
+   \mbox{}\texttt{\textcolor{Black}{143:}} \textit{\textcolor{Brown}{\ \ \ \ \ */}} \\
+   \mbox{}\texttt{\textcolor{Black}{144:}} \ \ \ \ \textcolor{ForestGreen}{void}\ \textbf{\textcolor{Black}{escribeOperaciones}}\ \textcolor{BrickRed}{();} \\
+   \mbox{}\texttt{\textcolor{Black}{145:}} \ \  \\
+   \mbox{}\texttt{\textcolor{Black}{146:}} \ \ \ \ \textit{\textcolor{Brown}{/**}} \\
+   \mbox{}\texttt{\textcolor{Black}{147:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ }}\textcolor{ForestGreen}{@brief}\textit{\textcolor{Brown}{\ Resuelve\ para\ un\ número\ dado.}} \\
+   \mbox{}\texttt{\textcolor{Black}{148:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ }}\textcolor{ForestGreen}{@param}\textit{\textcolor{Brown}{\ meta\ Número\ buscado.}} \\
+   \mbox{}\texttt{\textcolor{Black}{149:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ }}\textcolor{ForestGreen}{@return}\textit{\textcolor{Brown}{\ Verdadero\ si\ hay\ solución.}} \\
+   \mbox{}\texttt{\textcolor{Black}{150:}} \textit{\textcolor{Brown}{\ \ \ \ \ */}} \\
+   \mbox{}\texttt{\textcolor{Black}{151:}} \ \ \ \ \textcolor{ForestGreen}{bool}\ \textbf{\textcolor{Black}{resuelve}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ meta\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\textcolor{BrickRed}{);} \\
+   \mbox{}\texttt{\textcolor{Black}{152:}} \ \ \ \  \\
+   \mbox{}\texttt{\textcolor{Black}{153:}} \textbf{\textcolor{RoyalBlue}{\ \ \ \ \#ifndef}}\ GRUPOS \\
+   \mbox{}\texttt{\textcolor{Black}{154:}} \ \ \ \ \textit{\textcolor{Brown}{/**}} \\
+   \mbox{}\texttt{\textcolor{Black}{155:}} \textit{\textcolor{Brown}{\ \ \ \ \ *\ Sobrecarga\ del\ operador\ \textless{}\textless{}\ para\ salida\ de\ datos\ del\ TDA\ Cuenta}} \\
+   \mbox{}\texttt{\textcolor{Black}{156:}} \textit{\textcolor{Brown}{\ \ \ \ \ */}} \\
+   \mbox{}\texttt{\textcolor{Black}{157:}} \ \ \ \ \textbf{\textcolor{Blue}{friend}}\ std\textcolor{BrickRed}{::}ostream\textcolor{BrickRed}{\&}\ \textbf{\textcolor{Blue}{operator}}\textcolor{BrickRed}{\textless{}\textless{}(}std\textcolor{BrickRed}{::}ostream\textcolor{BrickRed}{\&}\ salida\textcolor{BrickRed}{,}\ \\ \textbf{\textcolor{Blue}{const}}\ Cifras\textcolor{BrickRed}{::}Cuenta\textcolor{BrickRed}{\&}\ operacion\textcolor{BrickRed}{);} \\
+   \mbox{}\texttt{\textcolor{Black}{158:}} \textbf{\textcolor{RoyalBlue}{\ \ \ \ \#endif}} \\
+   \mbox{}\texttt{\textcolor{Black}{159:}} \textcolor{Red}{\}}\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{160:}}  \\
+   \mbox{}\texttt{\textcolor{Black}{161:}} \textbf{\textcolor{Blue}{const}}\ \textcolor{ForestGreen}{char}\ SIMBOLOS\textcolor{BrickRed}{[]}\ \textcolor{BrickRed}{=}\ \texttt{\textcolor{Red}{"{}-/+*"{}}}\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{162:}}  \\
+   \mbox{}\texttt{\textcolor{Black}{163:}}  \\
+   \mbox{}\texttt{\textcolor{Black}{164:}} \textit{\textcolor{Brown}{/**}} \\
+   \mbox{}\texttt{\textcolor{Black}{165:}} \textit{\textcolor{Brown}{\ *\ Auxiliar\ que\ transforma\ un\ int\ en\ string.}} \\
+   \mbox{}\texttt{\textcolor{Black}{166:}} \textit{\textcolor{Brown}{\ */}} \\
+   \mbox{}\texttt{\textcolor{Black}{167:}} \textbf{\textcolor{Blue}{inline}}\ std\textcolor{BrickRed}{::}\textcolor{TealBlue}{string}\ \textbf{\textcolor{Black}{aString}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ n\textcolor{BrickRed}{)}\ \textcolor{Red}{\{} \\
+   \mbox{}\texttt{\textcolor{Black}{168:}} \ \ \ \ std\textcolor{BrickRed}{::}\textcolor{TealBlue}{stringstream}\ ss\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{169:}} \ \ \ \ ss\ \textcolor{BrickRed}{\textless{}\textless{}}\ n\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{170:}} \ \ \ \ \textbf{\textcolor{Blue}{return}}\ ss\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{str}}\textcolor{BrickRed}{();} \\
+   \mbox{}\texttt{\textcolor{Black}{171:}} \textcolor{Red}{\}} \\
+   \mbox{}\texttt{\textcolor{Black}{172:}} \textit{\textcolor{Brown}{/**}} \\
+   \mbox{}\texttt{\textcolor{Black}{173:}} \textit{\textcolor{Brown}{\ *\ Auxiliar\ que\ transforma\ un\ char\ en\ string.}} \\
+   \mbox{}\texttt{\textcolor{Black}{174:}} \textit{\textcolor{Brown}{\ */}} \\
+   \mbox{}\texttt{\textcolor{Black}{175:}} \textbf{\textcolor{Blue}{inline}}\ std\textcolor{BrickRed}{::}\textcolor{TealBlue}{string}\ \textbf{\textcolor{Black}{aString}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{char}\ c\textcolor{BrickRed}{)}\ \textcolor{Red}{\{} \\
+   \mbox{}\texttt{\textcolor{Black}{176:}} \ \ \ \ std\textcolor{BrickRed}{::}\textcolor{TealBlue}{stringstream}\ ss\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{177:}} \ \ \ \ ss\ \textcolor{BrickRed}{\textless{}\textless{}}\ c\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{178:}} \ \ \ \ \textbf{\textcolor{Blue}{return}}\ ss\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{str}}\textcolor{BrickRed}{();} \\
+   \mbox{}\texttt{\textcolor{Black}{179:}} \textcolor{Red}{\}} \\
+   \mbox{}\texttt{\textcolor{Black}{180:}}  \\
+   \mbox{}\texttt{\textcolor{Black}{181:}} \textbf{\textcolor{Blue}{inline}}\ std\textcolor{BrickRed}{::}\textcolor{TealBlue}{string}\ \textbf{\textcolor{Blue}{operator}}\textcolor{BrickRed}{+(}std\textcolor{BrickRed}{::}\textcolor{TealBlue}{string}\ a\textcolor{BrickRed}{,}\ std\textcolor{BrickRed}{::}\textcolor{TealBlue}{string}\ b\textcolor{BrickRed}{)}\ \textcolor{Red}{\{} \\
+   \mbox{}\texttt{\textcolor{Black}{182:}} \ \ \ \ \textbf{\textcolor{Blue}{return}}\ a\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{append}}\textcolor{BrickRed}{(}b\textcolor{BrickRed}{);} \\
+   \mbox{}\texttt{\textcolor{Black}{183:}} \textcolor{Red}{\}} \\
+   \mbox{}\texttt{\textcolor{Black}{184:}}  \\
+   \mbox{}\texttt{\textcolor{Black}{185:}} \textbf{\textcolor{RoyalBlue}{\#endif}} \\
+   \mbox{}\texttt{\textcolor{Black}{186:}} 
+   }
+   \normalsize
+   
+   
+   \subsection{Archivo cifras.cpp}
    \small
    \texttt{% Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
    \noindent
@@ -610,7 +804,64 @@ Los TDA empleados en la resolución del problema de las cifras han sido:\\
    \mbox{}\texttt{\textcolor{Black}{241:}} \textbf{\textcolor{RoyalBlue}{\#endif}} \\
    \mbox{}\texttt{\textcolor{Black}{242:}} 
    }
+   \normalsize
    
+   \subsection{Archivo main.cpp}
+   \small
+   % Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+   \noindent
+   \texttt{\mbox{}\texttt{\textcolor{Black}{01:}} \textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}iostream\textgreater{}}} \\
+   \mbox{}\texttt{\textcolor{Black}{02:}} \textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}vector\textgreater{}}} \\
+   \mbox{}\texttt{\textcolor{Black}{03:}} \textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{"{}cifras.h"{}}} \\
+   \mbox{}\texttt{\textcolor{Black}{04:}} \textbf{\textcolor{Blue}{using}}\ \textbf{\textcolor{Blue}{namespace}}\ std\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{05:}}  \\
+   \mbox{}\texttt{\textcolor{Black}{06:}} \textit{\textcolor{Brown}{/**}} \\
+   \mbox{}\texttt{\textcolor{Black}{07:}} \textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@brief}\textit{\textcolor{Brown}{\ Lee\ los\ números\ que\ serán\ usados.}} \\
+   \mbox{}\texttt{\textcolor{Black}{08:}} \textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@param}\textit{\textcolor{Brown}{\ n\ Número\ de\ números\ a\ leer.}} \\
+   \mbox{}\texttt{\textcolor{Black}{09:}} \textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@return}\textit{\textcolor{Brown}{\ Vector\ de\ números\ leidos.}} \\
+   \mbox{}\texttt{\textcolor{Black}{10:}} \textit{\textcolor{Brown}{\ */}} \\
+   \mbox{}\texttt{\textcolor{Black}{11:}} \textcolor{TealBlue}{vector\textless{}int\textgreater{}}\ \textbf{\textcolor{Black}{leerNumeros}}\ \textcolor{BrickRed}{()}\ \textcolor{Red}{\{} \\
+   \mbox{}\texttt{\textcolor{Black}{12:}} \ \ \ \ \textcolor{TealBlue}{vector\textless{}int\textgreater{}}\ numeros\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{13:}} \ \ \ \ \textcolor{ForestGreen}{int}\ leido\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{14:}} \ \ \ \ \textbf{\textcolor{Blue}{while}}\ \textcolor{BrickRed}{(}cin\ \textcolor{BrickRed}{\textgreater{}\textgreater{}}\ leido\textcolor{BrickRed}{)} \\
+   \mbox{}\texttt{\textcolor{Black}{15:}} \ \ \ \ \ \ \ \ numeros\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{push$\_$back}}\textcolor{BrickRed}{(}leido\textcolor{BrickRed}{);} \\
+   \mbox{}\texttt{\textcolor{Black}{16:}} \ \ \ \  \\
+   \mbox{}\texttt{\textcolor{Black}{17:}} \ \ \ \ \textbf{\textcolor{Blue}{return}}\ numeros\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{18:}} \textcolor{Red}{\}} \\
+   \mbox{}\texttt{\textcolor{Black}{19:}}  \\
+   \mbox{}\texttt{\textcolor{Black}{20:}} \textcolor{ForestGreen}{int}\ \textbf{\textcolor{Black}{main}}\textcolor{BrickRed}{()}\ \textcolor{Red}{\{} \\
+   \mbox{}\texttt{\textcolor{Black}{21:}} \ \ \ \ \textit{\textcolor{Brown}{//\ Lee\ números}} \\
+   \mbox{}\texttt{\textcolor{Black}{22:}} \textbf{\textcolor{RoyalBlue}{\ \ \ \ \#ifndef}}\ GRUPOS \\
+   \mbox{}\texttt{\textcolor{Black}{23:}} \ \ \ \ \textcolor{ForestGreen}{int}\ meta\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{24:}} \ \ \ \ cout\ \textcolor{BrickRed}{\textless{}\textless{}}\ \texttt{\textcolor{Red}{"{}Introduce\ meta\ a\ resolver:\ "{}}}\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{25:}} \ \ \ \ cin\ \textcolor{BrickRed}{\textgreater{}\textgreater{}}\ meta\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{26:}} \textbf{\textcolor{RoyalBlue}{\ \ \ \ \#endif}} \\
+   \mbox{}\texttt{\textcolor{Black}{27:}}  \\
+   \mbox{}\texttt{\textcolor{Black}{28:}} \ \ \ \ cout\ \textcolor{BrickRed}{\textless{}\textless{}}\ \texttt{\textcolor{Red}{"{}Introduce\ números:\ "{}}}\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{29:}} \ \ \ \ \textcolor{TealBlue}{vector\textless{}int\textgreater{}}\ \textbf{\textcolor{Black}{leidos}}\ \textcolor{BrickRed}{(}\textbf{\textcolor{Black}{leerNumeros}}\textcolor{BrickRed}{());} \\
+   \mbox{}\texttt{\textcolor{Black}{30:}} \ \ \ \  \\
+   \mbox{}\texttt{\textcolor{Black}{31:}} \ \ \ \ \textit{\textcolor{Brown}{//\ Resuelve\ el\ problema}} \\
+   \mbox{}\texttt{\textcolor{Black}{32:}} \ \ \ \ cout\ \textcolor{BrickRed}{\textless{}\textless{}}\ \texttt{\textcolor{Red}{"{}Resolviendo..."{}}}\ \textcolor{BrickRed}{\textless{}\textless{}}\ endl\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{33:}} \ \ \ \ \textcolor{TealBlue}{Cifras}\ \textbf{\textcolor{Black}{cifras}}\textcolor{BrickRed}{(}leidos\textcolor{BrickRed}{);} \\
+   \mbox{}\texttt{\textcolor{Black}{34:}}  \\
+   \mbox{}\texttt{\textcolor{Black}{35:}} \textbf{\textcolor{RoyalBlue}{\ \ \ \ \#ifndef}}\ GRUPOS \\
+   \mbox{}\texttt{\textcolor{Black}{36:}} \ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}cifras\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{resuelve}}\textcolor{BrickRed}{(}meta\textcolor{BrickRed}{))} \\
+   \mbox{}\texttt{\textcolor{Black}{37:}} \ \ \ \ \ \ \ \ cout\ \textcolor{BrickRed}{\textless{}\textless{}}\ \texttt{\textcolor{Red}{"{}Solución"{}}}\ \textcolor{BrickRed}{\textless{}\textless{}}\ endl\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{38:}} \ \ \ \ \textbf{\textcolor{Blue}{else}} \\
+   \mbox{}\texttt{\textcolor{Black}{39:}} \ \ \ \ \ \ \ \ cout\ \textcolor{BrickRed}{\textless{}\textless{}}\ \texttt{\textcolor{Red}{"{}Aproximación"{}}}\ \textcolor{BrickRed}{\textless{}\textless{}}\ endl\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{40:}} \ \ \ \  \\
+   \mbox{}\texttt{\textcolor{Black}{41:}} \ \ \ \ cifras\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{escribeOperaciones}}\textcolor{BrickRed}{();} \\
+   \mbox{}\texttt{\textcolor{Black}{42:}} \textbf{\textcolor{RoyalBlue}{\ \ \ \ \#endif}} \\
+   \mbox{}\texttt{\textcolor{Black}{43:}}  \\
+   \mbox{}\texttt{\textcolor{Black}{44:}} \textbf{\textcolor{RoyalBlue}{\ \ \ \ \#ifdef}}\ GRUPOS \\
+   \mbox{}\texttt{\textcolor{Black}{45:}} \ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}cifras\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{resuelve}}\textcolor{BrickRed}{()}\ \textcolor{TealBlue}{or}\ cifras\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{todos$\_$marcados}}\textcolor{BrickRed}{())} \\
+   \mbox{}\texttt{\textcolor{Black}{46:}} \ \ \ \ \ \ \ \ cout\ \textcolor{BrickRed}{\textless{}\textless{}}\ \texttt{\textcolor{Red}{"{}Marcados\ todos"{}}}\ \textcolor{BrickRed}{\textless{}\textless{}}\ endl\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{47:}} \ \ \ \ \textbf{\textcolor{Blue}{else}}\ \textcolor{Red}{\{} \\
+   \mbox{}\texttt{\textcolor{Black}{48:}} \ \ \ \ \ \ \ \ cout\ \textcolor{BrickRed}{\textless{}\textless{}}\ \texttt{\textcolor{Red}{"{}Faltaron\ por\ marcar:"{}}}\ \textcolor{BrickRed}{\textless{}\textless{}}\ endl\textcolor{BrickRed}{;} \\
+   \mbox{}\texttt{\textcolor{Black}{49:}} \ \ \ \ \ \ \ \ cifras\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{imprime$\_$restantes}}\textcolor{BrickRed}{();} \\
+   \mbox{}\texttt{\textcolor{Black}{50:}} \ \ \ \ \textcolor{Red}{\}} \\
+   \mbox{}\texttt{\textcolor{Black}{51:}} \textbf{\textcolor{RoyalBlue}{\ \ \ \ \#endif}} \\
+   \mbox{}\texttt{\textcolor{Black}{52:}} \textcolor{Red}{\}}}
    
    
    
