@@ -32,10 +32,14 @@
         Ignacio Cordón Castillo \and
         Mario Román García}
 \date{}
+
+\renewcommand*\contentsname{Contenidos}
 \begin{document}
 \maketitle
 
+\tableofcontents
 
+\newpage
 \section{Tipos de datos abstractos usados.}
 
 Se emplea la siguiente notación genérica para la representación 
@@ -169,7 +173,7 @@ Los TDA empleados en la resolución del problema de las cifras han sido:\\
 		\ENDFOR
 		}
     \ELSE
-		\STATE{Devolver \FALSE}
+		\RETURN\FALSE
 	\ENDIF
    \end{algorithmic}
    \caption{ALGORITMO DE CÁLCULO DEL NÚMERO DE 3 CIFRAS}
@@ -178,7 +182,7 @@ Los TDA empleados en la resolución del problema de las cifras han sido:\\
    
    Llamando $T(n)$ a la función que da la eficiencia del algoritmo \ref{Cifras},
    en función de la longitud del vector \C++{numeros}, esto es, de las cifras
-   dadas para llegar a meta, se tiene:Román
+   dadas para llegar a meta, se tiene:
    \begin{itemize} 
     \item [-] Desde las líneas 1 a 3, las operaciones realizadas son $\mathcal{O}(1)$
     \item [-] La selección de parejas \C++{(a,b)} de la línea 4 se hace mediante
@@ -217,11 +221,14 @@ Los TDA empleados en la resolución del problema de las cifras han sido:\\
                   
     y se tiene que:
     
-    \begin{eqnarray} \label{efic}
-    T(n)=\frac{n^2-1}{2}\cdot T(n-1)= \frac{n^2-1}{2}\cdot\frac{(n-1)^2-1}{2}
+    \begin{gather}
+    \begin{split}
+     \label{efic}
+    &T(n)=\frac{n^2-1}{2}\cdot T(n-1)= \frac{n^2-1}{2}\cdot\frac{(n-1)^2-1}{2}
     \cdot T(n-2)=\\ \nonumber
-    =\ldots=T(n-j-1)\cdot\frac{1}{2^{j+1}}\prod_{i=0}^j[(n-i)^2-1]
-    \end{eqnarray}
+    &=\ldots=T(n-j-1)\cdot\frac{1}{2^{j+1}}\prod_{i=0}^j[(n-i)^2-1]
+    \end{split}
+    \end{gather}
     
     Tomando $j=n-3$ en (\ref{efic}), se tiene $T(n)=
     \mathcal{O}\left(\frac{(n!)^2}{2^n}\right)$
@@ -231,12 +238,20 @@ Los TDA empleados en la resolución del problema de las cifras han sido:\\
    \newpage
    
 \subsection{Algoritmo de normalización de operaciones}
-   Puesto que en la lista de operaciones aparecen todas las operaciones necesarias
-   para llegar a \C++{meta} o a una aproximación a la misma, pero también pueden
-   más operaciones que las estrictamente necesarias, se presenta a continuación,
-   otro algoritmo para normalizar dichas operaciones en función del resultado obtenido
-   por el algoritmo \ref{Cifras}. Nótese que este algoritmo está destinado a mejorar una
-   solución válida ya obtenida para hacer que se muestre con las mínimas operaciones posibles.\\
+   Al calcular una solución del problema de las cifras, se van acumulando las operaciones
+   por las que se pasan hasta llegar a \C++{meta}. Sin embargo, es posible que algunas de
+   estas operaciones no se hayan utilizado en el cálculo de la solución, es decir, que sean
+   inservibles, aunque se haya pasado por ellas. El siguiente algoritmo identifica dichas
+   operaciones inútiles y las elimina de la secuencia generada por el algoritmo \ref{Cifras},
+   para obtener una solución que contenga únicamente las operaciones necesarias.
+
+
+   %Puesto que en la lista de operaciones aparecen todas las operaciones necesarias
+   %para llegar a \C++{meta} o a una aproximación a la misma, pero también pueden
+   %más operaciones que las estrictamente necesarias, se presenta a continuación,
+   %otro algoritmo para normalizar dichas operaciones en función del resultado obtenido
+   %por el algoritmo \ref{Cifras}. Nótese que este algoritmo está destinado a mejorar una
+   %solución válida ya obtenida para hacer que se muestre con las mínimas operaciones posibles.\\
    
    \begin{algorithm}[H]
    \begin{algorithmic}[1]
