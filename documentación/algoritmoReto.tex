@@ -93,7 +93,33 @@ Los TDA empleados en la resolución del problema de las cifras han sido:\\
    acierto, saca los números introducidos y devuelve los extraídos, y reitera con 
    otra pareja
   }
+  
+  \newpage
+  \objeto{Números}{\C++{- contenedorNumeros}\\
+  }{
+		   \C++{+ insertarResultado(resultado)}\\
+		   \C++{+ retirarNumero(posición)}\\
+  }{
+    \item \C++{contenedorNumeros} Contenedor en el que se almacenarán los números,
+    dependiendo de la implementación, podría ser un vector, una cola, una doble cola o un vector circular.
+    \item \C++{insertarResultado} Inserta un nuevo resultado en el contenedor de números,
+    con el que se podrá operar posteriormente.
+    \item \C++{retirarNumero} Retira un número ya usado, que ya no se podrá usar en siguientes operaciones.
+  }
+  
+  \objeto{Operación}{
+  }{
+		   \C++{+ funcionEnteros(int, int)}\\
+		   \C++{+ esPosible(int, int)}\\
+  }{
+    \item \C++{funcionEntreDosEnteros} Función $f: \C++{int} \times \C++{int} \rightarrow \C++{int}$,
+    en forma de función anónima lambda que representará una de las operaciones posibles entre dos
+    números del conjunto. En nuestro caso, sumas, restas, multiplicaciones y divisiones.
+    \item \C++{esPosible} Verdadero si se cumplen las condiciones que permiten que la operación
+    produzca un entero positivo.
+  }
    % ¿Faltaría el TDA Números?
+   % ¿Faltaría el TDA Operación?
    
    \newpage
    % Recreo el algoritmo intentando usar el más alto nivel posible.
@@ -152,7 +178,7 @@ Los TDA empleados en la resolución del problema de las cifras han sido:\\
    
    Llamando $T(n)$ a la función que da la eficiencia del algoritmo \ref{Cifras},
    en función de la longitud del vector \C++{numeros}, esto es, de las cifras
-   dadas para llegar a meta, se tiene:
+   dadas para llegar a meta, se tiene:Román
    \begin{itemize} 
     \item [-] Desde las líneas 1 a 3, las operaciones realizadas son $\mathcal{O}(1)$
     \item [-] La selección de parejas \C++{(a,b)} de la línea 4 se hace mediante
@@ -271,6 +297,12 @@ Los TDA empleados en la resolución del problema de las cifras han sido:\\
    \end{itemize}
 
    
+   \newpage
+   \subsection{Algoritmo alternativo}
+   Se propone otro algoritmo destinado a dar una orientación alternativa a la solución del problema. El algoritmo principal se centra
+   en buscar una solución siguiendo un sólo camino cada vez, y ahondando en la recursividad antes de volver a buscar por otro camino.
+   Este algoritmo buscar avanzar de forma uniforme por todos los caminos posibles hacia la solución.
+   
    
    \newpage
    \section{Implementación}
@@ -279,6 +311,7 @@ Los TDA empleados en la resolución del problema de las cifras han sido:\\
    de los casos, el tiempo requerido no excede los pocos segundos, estando el máximo en torno a los 20 segundos. \\
    
    % Habría que mostrar todo el código y dividirlo en los distintos ficheros.
+   
    % Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
    \small
    \texttt{% Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
