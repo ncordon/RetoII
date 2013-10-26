@@ -5,12 +5,12 @@ typedef int (*Operacion)(int a, int b);
 
 Cifras::Cifras (vector<int> introducidos) {
     #ifndef GRUPOS
-    // Primera aproximación
+    // Primera aproximaciÃ³n
     mejor = -1;
     #endif
   
     #ifdef GRUPOS
-    // Números marcados
+    // NÃºmeros marcados
     total_encontrados = 0;
     vector<bool> encontrado_inicial(BUSCADOS);
     for (int i=0; i<BUSCADOS; ++i)
@@ -21,7 +21,7 @@ Cifras::Cifras (vector<int> introducidos) {
     marcar(0);
     #endif
   
-    // Introduce los números en la doble cola.
+    // Introduce los nÃºmeros en la doble cola.
     vector<int> numeros;
     int size = introducidos.size();
     for (int i=0; i<size; ++i)
@@ -31,7 +31,7 @@ Cifras::Cifras (vector<int> introducidos) {
 }
 
 bool Cifras::resuelve (int meta) {
-    // Empieza comprobando que el número buscado no esté entre los dados.
+    // Empieza comprobando que el nÃºmero buscado no estÃ© entre los dados.
     for (vector<int>::iterator it = numeros.begin(); it != numeros.end(); ++it) {
         #ifndef GRUPOS
 	if (*it == meta) {
@@ -72,7 +72,7 @@ bool Cifras::resuelve_rec (int meta, int size) {
   
     if (size < 2) return false;
   
-    // Toma el primer número disponible
+    // Toma el primer nÃºmero disponible
     for (int i=0; i<size-1; ++i) {
 	int a = numeros[i];
     
@@ -81,7 +81,7 @@ bool Cifras::resuelve_rec (int meta, int size) {
 	else
 	    continue;
     
-	// Toma el segundo número disponible
+	// Toma el segundo nÃºmero disponible
 	for (int j=i; j<size-1; ++j) {
 	    int b = numeros[j];
 	    if (b != 0)
@@ -94,12 +94,12 @@ bool Cifras::resuelve_rec (int meta, int size) {
 		// Cogemos siempre c como el mayor de ambos
 		int c=(a>b?a:b), d=(c==a?b:a);
         
-		// Comprueba que la operación sea válida
+		// Comprueba que la operaciÃ³n sea vÃ¡lida
 		bool indivisible = ((c%d != 0) and op==DIV);
 		if (indivisible)
 		    continue;
         
-		// Comprueba que la operación sea útil
+		// Comprueba que la operaciÃ³n sea Ãºtil
 		int resultado = calcula[op](c,d);
 		bool trivial = (resultado == a or resultado == b);
 		bool zero = (resultado == 0);
@@ -107,12 +107,12 @@ bool Cifras::resuelve_rec (int meta, int size) {
 		if (trivial or overflow or zero)
 		    continue;
           
-		// Calcula y guarda la operación.
+		// Calcula y guarda la operaciÃ³n.
                 #ifndef GRUPOS		
 		opActual = {c, d, SIMBOLOS[op], resultado};
 		operaciones.push_back(opActual);
             
-		// Intenta resolver o mejorar con el nuevo número, sin pasarse
+		// Intenta resolver o mejorar con el nuevo nÃºmero, sin pasarse
 		if (abs(meta-resultado) < abs(meta-mejor)) {
 		    mejor = resultado;
 		    mejor_operaciones = operaciones;
@@ -122,7 +122,7 @@ bool Cifras::resuelve_rec (int meta, int size) {
 		}
                 #endif
         
-		// Marca el nuevo resultado y comprueba si están todos marcados
+		// Marca el nuevo resultado y comprueba si estÃ¡n todos marcados
                 #ifdef GRUPOS
 		if (marcar(resultado))
 		    return true;
