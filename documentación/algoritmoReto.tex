@@ -67,7 +67,7 @@ Los TDA empleados en la resolución del problema de las cifras han sido:\\
         \item \C++{operador} Carácter que corresponde a la operación realizada sobre los números.
         \item \C++{resultado} Número entero, resultado de realizar la operación sobre \C++{primero} y \C++{segundo}.
     }
- %\newpage 
+ \newpage 
  \objeto{ProblemaCifras}{\C++{- numerosIniciales}\\
                         \C++{- numeros}\\
                         \C++{- operaciones}\\
@@ -237,7 +237,7 @@ Los TDA empleados en la resolución del problema de las cifras han sido:\\
    \end{itemize}
 
    % Normalización e impresión de operaciones
-   \newpage
+   %\newpage
    
 \subsection{Algoritmo de normalización de operaciones}
    Al calcular una solución del problema de las cifras, se van acumulando las operaciones
@@ -298,7 +298,7 @@ Los TDA empleados en la resolución del problema de las cifras han sido:\\
    \end{algorithm}
    % Falta comentar cómo las operaciones para la mejor operación se copian a cada paso
    
-   \newpage
+   %\newpage
    \subsection{Optimización}
    El algoritmo mostrado puede ser optimizado haciendo que no estudie los casos en los que la pareja ordenada \C++{(a,b)} no cumpla unos
    determinados requisitos, y no compute el resultado en los casos en los que éste no aportara nada a la resolución del algoritmo. Las
@@ -314,7 +314,7 @@ Los TDA empleados en la resolución del problema de las cifras han sido:\\
    \end{itemize}
 
    
-   \newpage
+   %\newpage
    \subsection{Algoritmo alternativo}
    Se propone otro algoritmo destinado a dar una orientación alternativa a la solución del problema. El algoritmo principal se centra
    en buscar una solución siguiendo un sólo camino cada vez, y ahondando en la recursividad antes de volver a buscar por otro camino.
@@ -361,7 +361,18 @@ Los TDA empleados en la resolución del problema de las cifras han sido:\\
    \section{Implementación}
    Mostramos ahora cómo podría implementarse el algoritmo propuesto, aplicando sobre él las optimizaciones sugeridas.
    Con esta implementación hemos querido comprobar el correcto funcionamiento y eficiencia del algoritmo. Para la mayoría
-   de los casos, el tiempo requerido no excede los pocos segundos, estando el máximo en torno a los 20 segundos. \\
+   de los casos, el tiempo requerido no excede los pocos segundos, estando el máximo en torno al medio segundo.\\
+   
+   Se aclara que se han usado directivas de preprocesamiento para poder compilar el programa según la opción que se desee:
+   \begin{itemize}
+    \item [-] Resolver el problema de las cifras, es decir, para una serie de números dados y un objetivo de 3 dígitos
+    (realmente el programa realizado no tiene restricción sobre las cifras o la cantidad de números de partida dados), hallar
+    con ellos la aproximación más cercana al objetivo mediante operaciones elementales sin repetición de factores.
+    \item [-] \C++{GRUPOS} Averiguar, dado un conjunto de números, si pueden hallarse todos los números de 1 a 1000 operando
+    con las restricciones del problema de las cifras sobre ellos. Es decir, se verifica si el conjunto de números dado
+    es un grupo mágico.
+   \end{itemize}
+
    
    % Habría que mostrar todo el código y dividirlo en los distintos ficheros.
    
